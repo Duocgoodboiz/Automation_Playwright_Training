@@ -10,6 +10,9 @@ export class CheckoutPage {
   readonly cityInput: Locator;
   readonly phoneInput: Locator;
   readonly zipCodeInput: Locator;
+
+  readonly emailInput: Locator; 
+  
   readonly placeOrderBtn: Locator;
   readonly successMessage: Locator;
 
@@ -26,6 +29,8 @@ export class CheckoutPage {
     
     this.zipCodeInput = page.locator('#billing_postcode'); 
     
+    this.emailInput = page.locator('#billing_email'); 
+    
     this.placeOrderBtn = page.getByRole('button', { name: 'Place order' });
     this.successMessage = page.locator('.woocommerce-notice--success'); 
   }
@@ -35,7 +40,7 @@ export class CheckoutPage {
     await expect(this.orderItem.first()).toBeVisible();
   }
 
-  async fillBillingDetails(billingData: { firstName: string, lastName: string, address: string, city: string, phone: string, zipCode: string }) {
+  async fillBillingDetails(billingData: { firstName: string, lastName: string, address: string, city: string, phone: string, zipCode: string, email: string }) {
     await this.firstNameInput.fill(billingData.firstName);
     await this.lastNameInput.fill(billingData.lastName);
     
@@ -47,6 +52,8 @@ export class CheckoutPage {
     await this.cityInput.fill(billingData.city);
     await this.zipCodeInput.fill(billingData.zipCode);
     await this.phoneInput.fill(billingData.phone);
+    
+    await this.emailInput.fill(billingData.email);
   }
 
   async selectPaymentMethod(methodName: string) {
