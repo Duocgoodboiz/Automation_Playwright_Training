@@ -20,8 +20,14 @@ export class CartPage {
   }
 
   async clearAllItems() {
-    await this.clearCartBtn.click();
+    this.page.once('dialog', async dialog => {
+      console.log(`Hộp thoại xuất hiện với lời nhắn: "${dialog.message()}"`);
+      
+      await dialog.accept(); 
+    });
 
+    await this.clearCartBtn.click();
+    
     await this.page.waitForTimeout(2000); 
   }
 
