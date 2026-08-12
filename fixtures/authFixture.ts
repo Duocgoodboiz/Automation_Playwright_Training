@@ -3,6 +3,8 @@ import { HomePage } from '../pages/HomePage';
 import { ShopPage } from '../pages/ShopPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
+// BỔ SUNG: Import ProductDetailPage
+import { ProductDetailPage } from '../pages/ProductDetailPage'; 
 
 type MyFixtures = {
   loggedInPage: Page;
@@ -10,6 +12,7 @@ type MyFixtures = {
   shopPage: ShopPage;
   cartPage: CartPage;
   checkoutPage: CheckoutPage;
+  productDetailPage: ProductDetailPage; 
 };
 
 const USER_PREFIX = 'testuser_';
@@ -37,6 +40,9 @@ export const test = base.extend<MyFixtures>({
   },
   checkoutPage: async ({ loggedInPage }, use) => {
     await use(new CheckoutPage(loggedInPage));
+  },
+  productDetailPage: async ({ loggedInPage }, use) => {
+    await use(new ProductDetailPage(loggedInPage));
   },
 });
 
