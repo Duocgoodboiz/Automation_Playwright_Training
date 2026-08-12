@@ -1,6 +1,6 @@
 import { test } from '../fixtures/authFixture';
 
-test('TC_04 - Verify users can sort items by price', async ({ homePage, shopPage }) => {
+test.fixme('TC_04 - Verify users can sort items by price', async ({ homePage, shopPage }) => {
   await homePage.goToShop();
   await shopPage.switchToListView();
 

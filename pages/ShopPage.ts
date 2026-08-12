@@ -29,15 +29,12 @@ export class ShopPage {
 
   async addFirstItemToCart() {
     await this.firstProductLink.click();
-    
     await this.addToCartButton.click();
-    
     await this.page.waitForTimeout(2000); 
   }
 
   async addMultipleItemsToCart(amount: number) {
     const addButtons = await this.page.locator('.add_to_cart_button').all();
-    
     for (let i = 0; i < amount; i++) {
       await addButtons[i].click();
       await this.page.waitForTimeout(1500); 
@@ -46,21 +43,17 @@ export class ShopPage {
 
   async sortItemsByPrice(order: 'price' | 'price-desc') {
     await this.sortDropdown.selectOption(order);
-
-    await this.page.waitForURL(new RegExp(`orderby=${order}`), { timeout: 15000 });
-    
+    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
     await this.page.waitForLoadState('domcontentloaded');
   }
 
   async verifyItemsSortedByPrice(order: 'asc' | 'desc') {
     const rawPrices = await this.itemPrices.allInnerTexts();
-    
     const actualPrices = rawPrices.map(priceString => {
-      const matches = priceString.match(/\d+(?:,\d+)*(?:\.\d+)?/g);
-      
+      const matches = priceString.match(/[\d,]+(?:\.\d+)?/g);
       if (matches && matches.length > 0) {
-        const lastPrice = matches[matches.length - 1];
-        return parseFloat(lastPrice.replace(/,/g, ''));
+        const lastMatch = matches[matches.length - 1];
+        return parseFloat(lastMatch.replace(/,/g, ''));
       }
       return 0; 
     });
@@ -71,9 +64,8 @@ export class ShopPage {
 
     expect(actualPrices).toEqual(expectedPrices);
   }
-  
+
   async clickFirstProductToViewDetail() {
-    // Sử dụng class chuẩn từ Codegen để đảm bảo không click nhầm
     await this.page.locator('.product-content-image').first().click();
   }
 }

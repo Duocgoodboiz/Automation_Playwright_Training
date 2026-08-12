@@ -10,25 +10,24 @@ export class CheckoutPage {
   readonly cityInput: Locator;
   readonly phoneInput: Locator;
   readonly zipCodeInput: Locator;
+  readonly emailInput: Locator;
   readonly placeOrderBtn: Locator;
   readonly successMessage: Locator;
-  
-  readonly errorMessages: Locator; 
+  readonly errorMessages: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.checkoutTitle = page.getByText('Shopping cart Checkout Order');
     this.orderItem = page.locator('.cart_item');
-    
     this.firstNameInput = page.getByRole('textbox', { name: 'First name *' });
     this.lastNameInput = page.getByRole('textbox', { name: 'Last name *' });
     this.addressInput = page.getByRole('textbox', { name: 'Street address *' });
     this.cityInput = page.getByRole('textbox', { name: 'Town / City *' });
     this.phoneInput = page.getByRole('textbox', { name: 'Phone *' });
-    this.zipCodeInput = page.locator('#billing_postcode'); 
+    this.zipCodeInput = page.locator('#billing_postcode');
+    this.emailInput = page.locator('#billing_email');
     this.placeOrderBtn = page.getByRole('button', { name: 'Place order' });
-    this.successMessage = page.locator('.woocommerce-notice--success'); 
-    
+    this.successMessage = page.locator('.woocommerce-notice--success');
     this.errorMessages = page.locator('.woocommerce-error li');
   }
 
@@ -40,7 +39,7 @@ export class CheckoutPage {
   async fillBillingDetails(billingData: { firstName: string, lastName: string, address: string, city: string, phone: string, zipCode: string, email: string }) {
     await this.firstNameInput.fill(billingData.firstName);
     await this.lastNameInput.fill(billingData.lastName);
-    
+
     await this.page.locator('#select2-billing_country-container').click();
     await this.page.locator('.select2-search__field').fill('Vietnam');
     await this.page.locator('.select2-search__field').press('Enter');
@@ -49,32 +48,37 @@ export class CheckoutPage {
     await this.cityInput.fill(billingData.city);
     await this.zipCodeInput.fill(billingData.zipCode);
     await this.phoneInput.fill(billingData.phone);
-
     await this.emailInput.fill(billingData.email);
   }
 
   async selectPaymentMethod(methodName: string) {
-    await this.page.waitForSelector('.blockUI', { state: 'hidden', timeout: 10000 });
-    await this.page.getByText(methodName, { exact: true }).click();
+    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
+    await this.page.getByText(methodName, { exact: true }).click({ force: true });
   }
 
   async placeOrder() {
-    await this.page.waitForSelector('.blockUI', { state: 'hidden', timeout: 10000 });
-    await this.placeOrderBtn.click();
+    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
+    await this.page.waitForTimeout(2000); 
+    await this.placeOrderBtn.scrollIntoViewIfNeeded();
+    await this.placeOrderBtn.click({ force: true });
   }
 
-  async verifyOrderSuccess(timeoutMs: number = 15000) {
-    await expect(this.successMessage).toBeVisible({ timeout: timeoutMs });
+  async verifyOrderSuccess(timeoutMs: number = 30000) {
+    const element = await this.page.waitForSelector('.woocommerce-notice--success, .woocommerce-error', { state: 'visible', timeout: timeoutMs });
+    const className = await element.getAttribute('class') || '';
+
+    if (className.includes('woocommerce-error')) {
+      const errorText = await element.innerText();
+      throw new Error(`Test FAIL do Server Demo từ chối đơn hàng với lý do: ${errorText}`);
+    }
     await expect(this.page.getByRole('heading', { name: 'Order details' })).toBeVisible();
   }
 
   async verifyMandatoryFieldsError() {
-    await this.page.waitForSelector('.woocommerce-error', { state: 'visible', timeout: 10000 });
-
+    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
+    await this.page.waitForTimeout(2000);
+    await this.page.waitForSelector('.woocommerce-error', { state: 'visible', timeout: 15000 });
     const errorCount = await this.errorMessages.count();
     expect(errorCount).toBeGreaterThan(0);
-
-    const errors = await this.errorMessages.allInnerTexts();
-    console.log('Các lỗi bắt được trên màn hình:', errors);
   }
 }

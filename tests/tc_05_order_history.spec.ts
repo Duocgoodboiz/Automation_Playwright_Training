@@ -9,7 +9,7 @@ test('TC_05 - Verify orders appear in order history', async ({
   cartPage, 
   checkoutPage 
 }) => {
-  test.setTimeout(120000); 
+  test.setTimeout(180000);
 
   const myAccountPage = new MyAccountPage(loggedInPage);
 

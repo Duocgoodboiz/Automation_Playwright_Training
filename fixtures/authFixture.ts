@@ -3,7 +3,6 @@ import { HomePage } from '../pages/HomePage';
 import { ShopPage } from '../pages/ShopPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
-// BỔ SUNG: Import ProductDetailPage
 import { ProductDetailPage } from '../pages/ProductDetailPage'; 
 
 type MyFixtures = {
@@ -24,7 +23,7 @@ export const test = base.extend<MyFixtures>({
     await page.getByRole('link', { name: 'Log in / Sign up' }).click();
     const randomEmail = `${USER_PREFIX}${Date.now()}@gmail.com`;
     await page.locator('#reg_email').fill(randomEmail);
-    await page.getByRole('button', { name: 'Register' }).click();
+    await page.getByRole('button', { name: 'Register' }).click({ force: true });
     await page.waitForURL('**/my-account/**'); 
     await use(page);
   },
