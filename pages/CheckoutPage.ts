@@ -10,7 +10,6 @@ export class CheckoutPage {
   readonly cityInput: Locator;
   readonly phoneInput: Locator;
   readonly zipCodeInput: Locator;
-  readonly emailInput: Locator; 
   readonly placeOrderBtn: Locator;
   readonly successMessage: Locator;
   
@@ -27,7 +26,6 @@ export class CheckoutPage {
     this.cityInput = page.getByRole('textbox', { name: 'Town / City *' });
     this.phoneInput = page.getByRole('textbox', { name: 'Phone *' });
     this.zipCodeInput = page.locator('#billing_postcode'); 
-    this.emailInput = page.locator('#billing_email'); 
     this.placeOrderBtn = page.getByRole('button', { name: 'Place order' });
     this.successMessage = page.locator('.woocommerce-notice--success'); 
     
@@ -51,6 +49,7 @@ export class CheckoutPage {
     await this.cityInput.fill(billingData.city);
     await this.zipCodeInput.fill(billingData.zipCode);
     await this.phoneInput.fill(billingData.phone);
+
     await this.emailInput.fill(billingData.email);
   }
 
