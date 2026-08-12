@@ -5,6 +5,7 @@
     "address": "777 Ha Noi Street",
     "city": "Ha Noi",
     "phone": "0123456789",
-    "zipCode": "100000"
+    "zipCode": "100000",
+    "email": "testguest@yopmail.com"
   }
 }

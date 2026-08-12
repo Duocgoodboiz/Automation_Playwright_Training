@@ -18,7 +18,6 @@ export class CartPage {
     this.page = page;
     this.cartItem = page.locator('tbody tr.cart_item');
     this.proceedToCheckoutBtn = page.getByRole('link', { name: 'Proceed to checkout' });
-
     this.clearCartBtn = page.getByText('Clear shopping cart', { exact: false }); 
     this.emptyCartMessage = page.getByText(/YOUR SHOPPING CART IS EMPTY/i); 
     
@@ -40,7 +39,7 @@ export class CartPage {
 
   async clearAllItems() {
     this.page.once('dialog', async dialog => {
-      console.log(`"${dialog.message()}"`);
+      console.log(`Hộp thoại xuất hiện với lời nhắn: "${dialog.message()}"`);
       await dialog.accept(); 
     });
 
@@ -61,7 +60,6 @@ export class CartPage {
     await expect(this.qtyInput.first()).toHaveValue(expectedQty, { timeout: 10000 });
 
     const unitPrice = await this.getNumericPrice(this.productPrice);
-
     const expectedSubtotal = unitPrice * parseInt(expectedQty);
 
     await expect.poll(async () => {
