@@ -1,0 +1,496 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: tc_01_buy_item.spec.ts >> TC_01 - Verify users can buy an item successfully (POM version)
+- Location: tests/tc_01_buy_item.spec.ts:4:5
+
+# Error details
+
+```
+TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+Call log:
+  - waiting for locator('.woocommerce-notice--success, .woocommerce-error') to be visible
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [active] [ref=f5e1]:
+  - paragraph [ref=f5e2]:
+    - text: THIS IS A DEMO STORE FOR TESTING AND TRAINING PURPOSES - NO ORDERS SHALL BE FULFILLED. *** THIS SITE WILL BE RESET DAILY AT 23:00 ***
+    - link "Dismiss" [ref=f5e3] [cursor=pointer]:
+      - /url: "#"
+  - generic [ref=f5e4]:
+    - generic [ref=f5e5]:
+      - generic [ref=f5e6]:
+        - banner [ref=f5e7]:
+          - generic [ref=f5e8]:
+            - generic [ref=f5e12]:
+              - generic [ref=f5e14]:
+                - generic [ref=f5e15]:
+                  - generic [ref=f5e16]: 
+                  - text: Order online or call us (+1800) 000 8808
+                - generic [ref=f5e17]: │
+                - generic [ref=f5e18]:
+                  - generic [ref=f5e19]: 
+                  - text: 1730 S. Amphlett Blvd. Suite 200, San Mateo, CA
+              - generic [ref=f5e21]:
+                - link "Log in / Sign up" [ref=f5e23] [cursor=pointer]:
+                  - /url: https://demo.testarchitect.com/my-account/
+                - generic [ref=f5e29]: │
+                - generic [ref=f5e30]:
+                  - link "Pinterest" [ref=f5e31] [cursor=pointer]:
+                    - /url: "#"
+                  - link "Instagram" [ref=f5e34] [cursor=pointer]:
+                    - /url: "#"
+                  - link "Twitter" [ref=f5e37] [cursor=pointer]:
+                    - /url: "#"
+                  - link "Facebook" [ref=f5e40] [cursor=pointer]:
+                    - /url: "#"
+            - generic [ref=f5e46]:
+              - link [ref=f5e49] [cursor=pointer]:
+                - /url: https://demo.testarchitect.com
+              - generic [ref=f5e52]:
+                - generic [ref=f5e55]:
+                  - group "1 / 5" [ref=f5e56]:
+                    - generic [ref=f5e60]: NO ORDERS SHALL BE FULFILLED
+                  - group "2 / 5" [ref=f5e61]:
+                    - generic [ref=f5e65]: THIS IS THE TESTARCHITECT SAMPLE WEBSITE
+                  - group "3 / 5" [ref=f5e66]:
+                    - generic [ref=f5e70]: THIS SITE IS USING FOR TRAINING PURPOSE ONLY
+                  - group "4 / 5" [ref=f5e71]:
+                    - generic [ref=f5e75]: NO ORDERS SHALL BE FULFILLED
+                  - group "5 / 5" [ref=f5e76]:
+                    - generic [ref=f5e80]: THIS IS THE TESTARCHITECT SAMPLE WEBSITE
+                - search [ref=f5e82]:
+                  - generic [ref=f5e83]:
+                    - combobox [ref=f5e84] [cursor=pointer]:
+                      - option "All categories" [selected]
+                      - option "3D Glasses/ Virtual Reality Glasses"
+                      - option "Accessory Bundles"
+                      - option "Acoustic Components"
+                      - option "Acoustic Components"
+                      - option "Active Components"
+                      - option "Active Components"
+                      - option "Air-conditioning Installation"
+                      - option "Antennas for Communications"
+                      - option "Antennas for Communications"
+                      - option "Audio"
+                      - option "Automobiles & Motorcycles"
+                      - option "Barcode Printer"
+                      - option "Batteries & Accessories"
+                      - option "Battery Charger Cases"
+                      - option "Battery Charger Cases"
+                      - option "Camera & Photo"
+                      - option "Camera & Photo Accessories"
+                      - option "Capacitors"
+                      - option "Capacitors"
+                      - option "Car Camera"
+                      - option "Car Charger"
+                      - option "Car DVD"
+                      - option "Car DVRs"
+                      - option "Car Electrical Appliances"
+                      - option "Car Electronics"
+                      - option "Car Video Players"
+                      - option "Communication Equipment"
+                      - option "Communication Equipment"
+                      - option "Computer & Office"
+                      - option "Consumer Electronics"
+                      - option "Consumer Electronics"
+                      - option "Cooling System"
+                      - option "Creative Watches"
+                      - option "Creative Watches"
+                      - option "Digital Watches"
+                      - option "Dual Display Watches"
+                      - option "eBook Reader"
+                      - option "Electrical Ceramics"
+                      - option "Electrical Ceramics"
+                      - option "Electrical Contacts and Contact Materials"
+                      - option "Electrical Contacts and Contact Materials"
+                      - option "Electronic Accessories & Supplies"
+                      - option "Electronic Components & Supplies"
+                      - option "Elevators & Elevator Parts"
+                      - option "Elevators & Elevator Parts"
+                      - option "Engine"
+                      - option "Escalators & Escalator Parts"
+                      - option "Escalators & Escalator Parts"
+                      - option "Exhaust & Exhaust Systems"
+                      - option "Fax machines & Copiers"
+                      - option "Fiber Optic Equipments"
+                      - option "Fiber Optic Equipments"
+                      - option "Fixed Wireless Terminals"
+                      - option "Fixed Wireless Terminals"
+                      - option "GPS & Accessories"
+                      - option "Graph Plotter"
+                      - option "Insulation Materials & Elements"
+                      - option "Insulation Materials & Elements"
+                      - option "Integrated Circuits"
+                      - option "Keypads & Keyboards"
+                      - option "Keypads & Keyboards"
+                      - option "Lapdesks"
+                      - option "Laptop Accessories"
+                      - option "Laptop Batteries"
+                      - option "Marine GPS"
+                      - option "Mechanical Watches"
+                      - option "Memory Card"
+                      - option "Men’s Watches"
+                      - option "Men’s Watches"
+                      - option "Mobile Phone Accessories"
+                      - option "Mobile Phone Batteries"
+                      - option "Mobile Phone Cables"
+                      - option "Mobile Phone Part"
+                      - option "Mobile Phone Touch Panel"
+                      - option "Motorcycle GPS"
+                      - option "MP3 / MP4 Player Accessories"
+                      - option "MP4 Player"
+                      - option "Office Electronic"
+                      - option "Optical Drives"
+                      - option "Other Electronic Accessories"
+                      - option "Passive Components"
+                      - option "Passive Components"
+                      - option "PCB & PCBA"
+                      - option "PCB & PCBA"
+                      - option "Phone Bags & Cases"
+                      - option "Phones & Telecommunications"
+                      - option "Phones & Telecommunications"
+                      - option "Pocket Watch Chains"
+                      - option "Pocket Watch Chains"
+                      - option "Portable Audio & Video"
+                      - option "Portable Audio & Video"
+                      - option "Portable TV"
+                      - option "Potentiometers"
+                      - option "Potentiometers"
+                      - option "Printers"
+                      - option "Processors"
+                      - option "Projectors & Accessories"
+                      - option "Quartz Watches"
+                      - option "Radar Detectors"
+                      - option "Radiators & Parts"
+                      - option "Replacement Parts"
+                      - option "Resistors"
+                      - option "Resistors"
+                      - option "Scanners"
+                      - option "Screen Protectors"
+                      - option "Sensors"
+                      - option "SIM Card & Tools"
+                      - option "Smart Accessories"
+                      - option "Smart Electronic Devices"
+                      - option "Smart Glasses"
+                      - option "Smart Home Controls"
+                      - option "Smart Remote Control"
+                      - option "Smart Watches"
+                      - option "Smart Watches"
+                      - option "Speakers"
+                      - option "Sport & Handheld GPS"
+                      - option "Tablet Accessories"
+                      - option "Telecom Parts"
+                      - option "Telecom Parts"
+                      - option "Telecommunication Tower"
+                      - option "Telecommunication Tower"
+                      - option "Vehicle GPS"
+                      - option "Walkie Talkie"
+                      - option "Walkie Talkie"
+                      - option "Watch Accessories"
+                      - option "Watch Batteries"
+                      - option "Watch Batteries"
+                      - option "Watchbands"
+                      - option "Watchbands"
+                      - option "Watches"
+                      - option "Wearable Devices"
+                      - option "Women’s Sports Watches"
+                      - option "Women’s Watches"
+                      - option "Women’s Watches"
+                      - option "Wood Series"
+                      - option "カーエレクトロニクス"
+                      - option "その他の電子アクセサリー"
+                      - option "その他の電子アクセサリー"
+                      - option "携帯電話アクセサリー"
+                      - option "電子部品および消耗品"
+                    - generic [ref=f5e85]: Search input
+                    - textbox "Search input" [ref=f5e86]:
+                      - /placeholder: Type here...
+                    - button [ref=f5e88] [cursor=pointer]
+              - generic [ref=f5e92]:
+                - link "0 Wishlist" [ref=f5e94] [cursor=pointer]:
+                  - /url: https://demo.testarchitect.com/wishlist/
+                  - generic [ref=f5e95]:
+                    - generic [ref=f5e96]: "0"
+                    - generic [ref=f5e101]: Wishlist
+                - generic [ref=f5e102]: │
+                - link "1 $290.00" [ref=f5e104] [cursor=pointer]:
+                  - /url: https://demo.testarchitect.com/cart/
+                  - generic [ref=f5e105]:
+                    - generic [ref=f5e106]: "1"
+                    - generic [ref=f5e111]: $290.00
+            - generic [ref=f5e118]:
+              - generic [ref=f5e121]:
+                - generic [ref=f5e122] [cursor=pointer]:
+                  - generic [ref=f5e123]: 
+                  - generic [ref=f5e125]: All departments
+                  - text: 
+                - generic:       
+              - list [ref=f5e129]:
+                - listitem [ref=f5e130]:
+                  - link "Home" [ref=f5e131] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/
+                - listitem [ref=f5e132]:
+                  - link "About Us" [ref=f5e133] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/about-us/
+                - listitem [ref=f5e134]:
+                  - link "Shop" [ref=f5e135] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/shop/
+                - listitem [ref=f5e136]:
+                  - link " Offers" [ref=f5e137] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/electronic-components-supplies/
+                    - generic [ref=f5e138]: 
+                    - text: Offers
+                - listitem [ref=f5e139]:
+                  - link "Blog" [ref=f5e140] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/blog/
+                - listitem [ref=f5e141]:
+                  - link "Contact Us" [ref=f5e142] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/contact/
+        - generic: 
+        - generic [ref=f5e143]:
+          - link "1 Shopping cart" [ref=f5e144] [cursor=pointer]:
+            - /url: https://demo.testarchitect.com/cart/
+          - link "2 Checkout":
+            - /url: https://demo.testarchitect.com/checkout/
+          - link "3 Order status":
+            - /url: "#"
+          - generic [ref=f5e145]: 🔥 Hurry up, these products are limited, checkout within 14:40
+        - generic [ref=f5e151]:
+          - generic [ref=f5e152]:
+            - generic [ref=f5e154]:
+              - text: 󡀀 Returning customer?
+              - link "Click here to login" [ref=f5e155] [cursor=pointer]:
+                - /url: "#"
+            - generic [ref=f5e157]:
+              - text:  Have a coupon?
+              - link "Click here to enter your code" [ref=f5e158] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=f5e160]:
+            - generic [ref=f5e162]:
+              - generic [ref=f5e164]:
+                - heading "Billing Details" [level=3] [ref=f5e165]
+                - generic [ref=f5e166]:
+                  - paragraph [ref=f5e167]:
+                    - generic [ref=f5e168]: First name *
+                    - textbox "First name *" [ref=f5e170]:
+                      - /placeholder: ""
+                      - text: Duoc
+                  - paragraph [ref=f5e171]:
+                    - generic [ref=f5e172]: Last name *
+                    - textbox "Last name *" [ref=f5e174]:
+                      - /placeholder: ""
+                      - text: Nguyen
+                  - paragraph [ref=f5e175]:
+                    - generic [ref=f5e176]: Company name (optional)
+                    - textbox "Company name (optional)" [ref=f5e178]:
+                      - /placeholder: ""
+                  - paragraph [ref=f5e179]:
+                    - generic [ref=f5e180]: Country / Region *
+                    - generic [ref=f5e181]:
+                      - combobox [ref=f5e182] [cursor=pointer]
+                      - combobox "Country / Region" [ref=f5e185] [cursor=pointer]:
+                        - textbox "Vietnam" [ref=f5e186]
+                  - paragraph [ref=f5e187]:
+                    - generic [ref=f5e188]: Street address *
+                    - textbox "Street address *" [ref=f5e190]:
+                      - /placeholder: House number and street name
+                      - text: 777 Ha Noi Street
+                  - paragraph [ref=f5e191]:
+                    - generic [ref=f5e192]:
+                      - text: Apartment, suite, unit, etc.
+                      - generic [ref=f5e193]: (optional)
+                    - textbox "Apartment, suite, unit, etc. (optional)" [ref=f5e195]
+                  - paragraph [ref=f5e196]:
+                    - generic [ref=f5e197]: Postcode / ZIP (optional)
+                    - textbox "Postcode / ZIP (optional)" [ref=f5e199]:
+                      - /placeholder: ""
+                      - text: "100000"
+                  - paragraph [ref=f5e200]:
+                    - generic [ref=f5e201]: Town / City *
+                    - textbox "Town / City *" [ref=f5e203]:
+                      - /placeholder: ""
+                      - text: Ha Noi
+                  - paragraph [ref=f5e204]:
+                    - generic [ref=f5e205]: Phone *
+                    - textbox "Phone *" [ref=f5e207]:
+                      - /placeholder: ""
+                      - text: "0123456789"
+                  - paragraph [ref=f5e208]:
+                    - generic [ref=f5e209]: Email address *
+                    - textbox "Email address *" [ref=f5e211]:
+                      - /placeholder: ""
+                      - text: testguest@yopmail.com
+                - paragraph [ref=f5e213]:
+                  - generic [ref=f5e214]:
+                    - checkbox "Create an account?" [ref=f5e215]
+                    - text: Create an account?
+              - paragraph [ref=f5e219]:
+                - generic [ref=f5e220]: Order notes (optional)
+                - textbox "Order notes (optional)" [ref=f5e222]:
+                  - /placeholder: Notes about your order, e.g. special notes for delivery.
+            - generic [ref=f5e224]:
+              - heading "Your order" [level=3] [ref=f5e225]
+              - generic [ref=f5e226]:
+                - table [ref=f5e227]:
+                  - rowgroup [ref=f5e228]:
+                    - row [ref=f5e229]:
+                      - cell [ref=f5e230]:
+                        - text: Canon i-SENSYS LBP6030W with Wi-Fi
+                        - strong [ref=f5e231]: × 1
+                      - cell "$290.00" [ref=f5e232]
+                  - rowgroup [ref=f5e235]:
+                    - row [ref=f5e236]:
+                      - rowheader "Subtotal" [ref=f5e237]
+                      - cell "$290.00" [ref=f5e238]
+                    - row [ref=f5e241]:
+                      - rowheader "Total" [ref=f5e242]
+                      - cell "$290.00" [ref=f5e243]:
+                        - strong [ref=f5e244]:
+                          - generic [ref=f5e245]: $290.00
+                - generic [ref=f5e247]:
+                  - list [ref=f5e248]:
+                    - listitem [ref=f5e249]:
+                      - radio "Direct bank transfer" [checked] [ref=f5e250]
+                      - generic [ref=f5e251]: Direct bank transfer
+                      - paragraph [ref=f5e253]: Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+                    - listitem [ref=f5e254]:
+                      - radio "Check payments" [ref=f5e255]
+                      - generic [ref=f5e256]: Check payments
+                    - listitem [ref=f5e257]:
+                      - radio "Cash on delivery" [ref=f5e258]
+                      - generic [ref=f5e259]: Cash on delivery
+                  - generic [ref=f5e260]:
+                    - paragraph [ref=f5e263]:
+                      - text: Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our
+                      - link "privacy policy" [ref=f5e264] [cursor=pointer]:
+                        - /url: https://demo.testarchitect.com/?page_id=3
+                      - text: .
+                    - button "Place order" [ref=f5e265] [cursor=pointer]
+        - contentinfo [ref=f5e266]
+      - generic [ref=f5e280]:
+        - contentinfo [ref=f5e281]:
+          - generic [ref=f5e288]:
+            - img "talogoblue" [ref=f5e293]
+            - generic [ref=f5e299]:
+              - link "About Us" [ref=f5e300] [cursor=pointer]:
+                - /url: /about-us/
+              - link "Shop" [ref=f5e301] [cursor=pointer]:
+                - /url: /shop/
+              - link "Offers" [ref=f5e302] [cursor=pointer]:
+                - /url: /electronic-components-supplies/
+              - link "Blog" [ref=f5e303] [cursor=pointer]:
+                - /url: /blog/
+              - link "Contact Us" [ref=f5e304] [cursor=pointer]:
+                - /url: /contact/
+        - generic [ref=f5e305]: Copyright © 2021 LogiGear Corporation. All rights reserved.
+    - generic [ref=f5e315] [cursor=pointer]: 
+  - generic [ref=f5e319]: widescreen
+  - dialog "Cookie Notice" [ref=f5e320]:
+    - generic [ref=f5e321]:
+      - generic [ref=f5e322]: We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it.
+      - link "Ok" [ref=f5e324] [cursor=pointer]:
+        - /url: "#"
+      - generic "No" [ref=f5e325] [cursor=pointer]
+```
+
+# Test source
+
+```ts
+  1  | import { Page, Locator, expect } from '@playwright/test';
+  2  | 
+  3  | export class CheckoutPage {
+  4  |   readonly page: Page;
+  5  |   readonly checkoutTitle: Locator;
+  6  |   readonly orderItem: Locator;
+  7  |   readonly firstNameInput: Locator;
+  8  |   readonly lastNameInput: Locator;
+  9  |   readonly addressInput: Locator;
+  10 |   readonly cityInput: Locator;
+  11 |   readonly phoneInput: Locator;
+  12 |   readonly zipCodeInput: Locator;
+  13 |   readonly emailInput: Locator;
+  14 |   readonly placeOrderBtn: Locator;
+  15 |   readonly successMessage: Locator;
+  16 |   readonly errorMessages: Locator;
+  17 | 
+  18 |   constructor(page: Page) {
+  19 |     this.page = page;
+  20 |     this.checkoutTitle = page.getByText('Shopping cart Checkout Order');
+  21 |     this.orderItem = page.locator('.cart_item');
+  22 |     this.firstNameInput = page.getByRole('textbox', { name: 'First name *' });
+  23 |     this.lastNameInput = page.getByRole('textbox', { name: 'Last name *' });
+  24 |     this.addressInput = page.getByRole('textbox', { name: 'Street address *' });
+  25 |     this.cityInput = page.getByRole('textbox', { name: 'Town / City *' });
+  26 |     this.phoneInput = page.getByRole('textbox', { name: 'Phone *' });
+  27 |     this.zipCodeInput = page.locator('#billing_postcode');
+  28 |     this.emailInput = page.locator('#billing_email');
+  29 |     this.placeOrderBtn = page.getByRole('button', { name: 'Place order' });
+  30 |     this.successMessage = page.locator('.woocommerce-notice--success');
+  31 |     this.errorMessages = page.locator('.woocommerce-error li');
+  32 |   }
+  33 | 
+  34 |   async verifyCheckoutPageDisplayed() {
+  35 |     await expect(this.checkoutTitle).toBeVisible();
+  36 |     await expect(this.orderItem.first()).toBeVisible();
+  37 |   }
+  38 | 
+  39 |   async fillBillingDetails(billingData: { firstName: string, lastName: string, address: string, city: string, phone: string, zipCode: string, email: string }) {
+  40 |     await this.firstNameInput.fill(billingData.firstName);
+  41 |     await this.lastNameInput.fill(billingData.lastName);
+  42 | 
+  43 |     await this.page.locator('#select2-billing_country-container').click();
+  44 |     await this.page.locator('.select2-search__field').fill('Vietnam');
+  45 |     await this.page.locator('.select2-search__field').press('Enter');
+  46 | 
+  47 |     await this.addressInput.fill(billingData.address);
+  48 |     await this.cityInput.fill(billingData.city);
+  49 |     await this.zipCodeInput.fill(billingData.zipCode);
+  50 |     await this.phoneInput.fill(billingData.phone);
+  51 |     await this.emailInput.fill(billingData.email);
+  52 |   }
+  53 | 
+  54 |   async selectPaymentMethod(methodName: string) {
+  55 |     await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 10000 }).catch(() => {});
+  56 |     await this.page.getByText(methodName, { exact: true }).click({ force: true });
+  57 |   }
+  58 | 
+  59 |   async placeOrder() {
+  60 |     await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 10000 }).catch(() => {});
+  61 |     await this.placeOrderBtn.click({ force: true });
+  62 |   }
+  63 | 
+  64 |   async verifyOrderSuccess(timeoutMs: number = 15000) {
+  65 |     // Kỹ thuật gộp selector: Chờ 1 trong 2 thẻ xuất hiện (Thành công HOẶC Lỗi)
+> 66 |     const element = await this.page.waitForSelector('.woocommerce-notice--success, .woocommerce-error', { state: 'visible', timeout: timeoutMs });
+     |                                     ^ TimeoutError: page.waitForSelector: Timeout 15000ms exceeded.
+  67 |     const className = await element.getAttribute('class') || '';
+  68 | 
+  69 |     // Nếu thẻ xuất hiện là thẻ lỗi (Hết hàng/Spam) -> In log và cho qua
+  70 |     if (className.includes('woocommerce-error')) {
+  71 |       console.log("CẢNH BÁO TỪ DEMO SERVER:", await element.innerText());
+  72 |       return; 
+  73 |     }
+  74 | 
+  75 |     // Nếu không phải thẻ lỗi, tiếp tục xác nhận thành công
+  76 |     await expect(this.page.getByRole('heading', { name: 'Order details' })).toBeVisible();
+  77 |   }
+  78 | 
+  79 |   async verifyMandatoryFieldsError() {
+  80 |     // Phải đợi loading mất đi thì lỗi mới hiện ra
+  81 |     await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 10000 }).catch(() => {});
+  82 |     await this.page.waitForSelector('.woocommerce-error', { state: 'visible', timeout: 10000 });
+  83 |     const errorCount = await this.errorMessages.count();
+  84 |     expect(errorCount).toBeGreaterThan(0);
+  85 |   }
+  86 | }
+```

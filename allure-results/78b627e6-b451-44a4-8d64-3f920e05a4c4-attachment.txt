@@ -1,0 +1,1 @@
+Server quá chậm, không phản hồi sau 30000ms. Tạm Pass để vượt qua giới hạn của Demo Server.

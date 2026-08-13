@@ -1,0 +1,792 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: tc_10_post_review.spec.ts >> TC_10 - Verify users can post a review
+- Location: tests/tc_10_post_review.spec.ts:3:5
+
+# Error details
+
+```
+Error: locator.click: Element is not visible
+Call log:
+  - waiting for locator('.stars a.star-5')
+    - locator resolved to <a href="#" class="star-5">5</a>
+  - attempting click action
+    - scrolling into view if needed
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=f3e1]:
+  - paragraph [ref=f3e2]:
+    - text: THIS IS A DEMO STORE FOR TESTING AND TRAINING PURPOSES - NO ORDERS SHALL BE FULFILLED. *** THIS SITE WILL BE RESET DAILY AT 23:00 ***
+    - link "Dismiss" [ref=f3e3] [cursor=pointer]:
+      - /url: "#"
+  - generic [ref=f3e4]:
+    - generic [ref=f3e5]:
+      - generic [ref=f3e6]:
+        - banner [ref=f3e7]:
+          - generic [ref=f3e8]:
+            - generic [ref=f3e12]:
+              - generic [ref=f3e14]:
+                - generic [ref=f3e15]:
+                  - generic [ref=f3e16]: 
+                  - text: Order online or call us (+1800) 000 8808
+                - generic [ref=f3e17]: │
+                - generic [ref=f3e18]:
+                  - generic [ref=f3e19]: 
+                  - text: 1730 S. Amphlett Blvd. Suite 200, San Mateo, CA
+              - generic [ref=f3e21]:
+                - link "Log in / Sign up" [ref=f3e23] [cursor=pointer]:
+                  - /url: https://demo.testarchitect.com/my-account/
+                - generic [ref=f3e29]: │
+                - generic [ref=f3e30]:
+                  - link "Pinterest" [ref=f3e31] [cursor=pointer]:
+                    - /url: "#"
+                  - link "Instagram" [ref=f3e34] [cursor=pointer]:
+                    - /url: "#"
+                  - link "Twitter" [ref=f3e37] [cursor=pointer]:
+                    - /url: "#"
+                  - link "Facebook" [ref=f3e40] [cursor=pointer]:
+                    - /url: "#"
+            - generic [ref=f3e46]:
+              - link [ref=f3e49] [cursor=pointer]:
+                - /url: https://demo.testarchitect.com
+              - generic [ref=f3e52]:
+                - generic [ref=f3e55]:
+                  - group "1 / 5" [ref=f3e56]:
+                    - generic [ref=f3e60]: NO ORDERS SHALL BE FULFILLED
+                  - group "2 / 5" [ref=f3e61]:
+                    - generic [ref=f3e65]: THIS IS THE TESTARCHITECT SAMPLE WEBSITE
+                  - group "3 / 5" [ref=f3e66]:
+                    - generic [ref=f3e70]: THIS SITE IS USING FOR TRAINING PURPOSE ONLY
+                  - group "4 / 5" [ref=f3e71]:
+                    - generic [ref=f3e75]: NO ORDERS SHALL BE FULFILLED
+                  - group "5 / 5" [ref=f3e76]:
+                    - generic [ref=f3e80]: THIS IS THE TESTARCHITECT SAMPLE WEBSITE
+                - search [ref=f3e82]:
+                  - generic [ref=f3e83]:
+                    - combobox [ref=f3e84] [cursor=pointer]:
+                      - option "All categories" [selected]
+                      - option "3D Glasses/ Virtual Reality Glasses"
+                      - option "Accessory Bundles"
+                      - option "Acoustic Components"
+                      - option "Acoustic Components"
+                      - option "Active Components"
+                      - option "Active Components"
+                      - option "Air-conditioning Installation"
+                      - option "Antennas for Communications"
+                      - option "Antennas for Communications"
+                      - option "Audio"
+                      - option "Automobiles & Motorcycles"
+                      - option "Barcode Printer"
+                      - option "Batteries & Accessories"
+                      - option "Battery Charger Cases"
+                      - option "Battery Charger Cases"
+                      - option "Camera & Photo"
+                      - option "Camera & Photo Accessories"
+                      - option "Capacitors"
+                      - option "Capacitors"
+                      - option "Car Camera"
+                      - option "Car Charger"
+                      - option "Car DVD"
+                      - option "Car DVRs"
+                      - option "Car Electrical Appliances"
+                      - option "Car Electronics"
+                      - option "Car Video Players"
+                      - option "Communication Equipment"
+                      - option "Communication Equipment"
+                      - option "Computer & Office"
+                      - option "Consumer Electronics"
+                      - option "Consumer Electronics"
+                      - option "Cooling System"
+                      - option "Creative Watches"
+                      - option "Creative Watches"
+                      - option "Digital Watches"
+                      - option "Dual Display Watches"
+                      - option "eBook Reader"
+                      - option "Electrical Ceramics"
+                      - option "Electrical Ceramics"
+                      - option "Electrical Contacts and Contact Materials"
+                      - option "Electrical Contacts and Contact Materials"
+                      - option "Electronic Accessories & Supplies"
+                      - option "Electronic Components & Supplies"
+                      - option "Elevators & Elevator Parts"
+                      - option "Elevators & Elevator Parts"
+                      - option "Engine"
+                      - option "Escalators & Escalator Parts"
+                      - option "Escalators & Escalator Parts"
+                      - option "Exhaust & Exhaust Systems"
+                      - option "Fax machines & Copiers"
+                      - option "Fiber Optic Equipments"
+                      - option "Fiber Optic Equipments"
+                      - option "Fixed Wireless Terminals"
+                      - option "Fixed Wireless Terminals"
+                      - option "GPS & Accessories"
+                      - option "Graph Plotter"
+                      - option "Insulation Materials & Elements"
+                      - option "Insulation Materials & Elements"
+                      - option "Integrated Circuits"
+                      - option "Keypads & Keyboards"
+                      - option "Keypads & Keyboards"
+                      - option "Lapdesks"
+                      - option "Laptop Accessories"
+                      - option "Laptop Batteries"
+                      - option "Marine GPS"
+                      - option "Mechanical Watches"
+                      - option "Memory Card"
+                      - option "Men’s Watches"
+                      - option "Men’s Watches"
+                      - option "Mobile Phone Accessories"
+                      - option "Mobile Phone Batteries"
+                      - option "Mobile Phone Cables"
+                      - option "Mobile Phone Part"
+                      - option "Mobile Phone Touch Panel"
+                      - option "Motorcycle GPS"
+                      - option "MP3 / MP4 Player Accessories"
+                      - option "MP4 Player"
+                      - option "Office Electronic"
+                      - option "Optical Drives"
+                      - option "Other Electronic Accessories"
+                      - option "Passive Components"
+                      - option "Passive Components"
+                      - option "PCB & PCBA"
+                      - option "PCB & PCBA"
+                      - option "Phone Bags & Cases"
+                      - option "Phones & Telecommunications"
+                      - option "Phones & Telecommunications"
+                      - option "Pocket Watch Chains"
+                      - option "Pocket Watch Chains"
+                      - option "Portable Audio & Video"
+                      - option "Portable Audio & Video"
+                      - option "Portable TV"
+                      - option "Potentiometers"
+                      - option "Potentiometers"
+                      - option "Printers"
+                      - option "Processors"
+                      - option "Projectors & Accessories"
+                      - option "Quartz Watches"
+                      - option "Radar Detectors"
+                      - option "Radiators & Parts"
+                      - option "Replacement Parts"
+                      - option "Resistors"
+                      - option "Resistors"
+                      - option "Scanners"
+                      - option "Screen Protectors"
+                      - option "Sensors"
+                      - option "SIM Card & Tools"
+                      - option "Smart Accessories"
+                      - option "Smart Electronic Devices"
+                      - option "Smart Glasses"
+                      - option "Smart Home Controls"
+                      - option "Smart Remote Control"
+                      - option "Smart Watches"
+                      - option "Smart Watches"
+                      - option "Speakers"
+                      - option "Sport & Handheld GPS"
+                      - option "Tablet Accessories"
+                      - option "Telecom Parts"
+                      - option "Telecom Parts"
+                      - option "Telecommunication Tower"
+                      - option "Telecommunication Tower"
+                      - option "Vehicle GPS"
+                      - option "Walkie Talkie"
+                      - option "Walkie Talkie"
+                      - option "Watch Accessories"
+                      - option "Watch Batteries"
+                      - option "Watch Batteries"
+                      - option "Watchbands"
+                      - option "Watchbands"
+                      - option "Watches"
+                      - option "Wearable Devices"
+                      - option "Women’s Sports Watches"
+                      - option "Women’s Watches"
+                      - option "Women’s Watches"
+                      - option "Wood Series"
+                      - option "カーエレクトロニクス"
+                      - option "その他の電子アクセサリー"
+                      - option "その他の電子アクセサリー"
+                      - option "携帯電話アクセサリー"
+                      - option "電子部品および消耗品"
+                    - generic [ref=f3e85]: Search input
+                    - textbox "Search input" [ref=f3e86]:
+                      - /placeholder: Type here...
+                    - button [ref=f3e88] [cursor=pointer]
+              - generic [ref=f3e92]:
+                - link "0 Wishlist" [ref=f3e94] [cursor=pointer]:
+                  - /url: https://demo.testarchitect.com/wishlist/
+                  - generic [ref=f3e95]:
+                    - generic [ref=f3e96]: "0"
+                    - generic [ref=f3e101]: Wishlist
+                - generic [ref=f3e102]: │
+                - link "0 $0.00" [ref=f3e104] [cursor=pointer]:
+                  - /url: https://demo.testarchitect.com/cart/
+                  - generic [ref=f3e105]:
+                    - generic [ref=f3e106]: "0"
+                    - generic [ref=f3e111]: $0.00
+            - generic [ref=f3e118]:
+              - generic [ref=f3e121]:
+                - generic [ref=f3e122] [cursor=pointer]:
+                  - generic [ref=f3e123]: 
+                  - generic [ref=f3e125]: All departments
+                  - text: 
+                - generic:       
+              - list [ref=f3e129]:
+                - listitem [ref=f3e130]:
+                  - link "Home" [ref=f3e131] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/
+                - listitem [ref=f3e132]:
+                  - link "About Us" [ref=f3e133] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/about-us/
+                - listitem [ref=f3e134]:
+                  - link "Shop" [ref=f3e135] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/shop/
+                - listitem [ref=f3e136]:
+                  - link " Offers" [ref=f3e137] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/electronic-components-supplies/
+                    - generic [ref=f3e138]: 
+                    - text: Offers
+                - listitem [ref=f3e139]:
+                  - link "Blog" [ref=f3e140] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/blog/
+                - listitem [ref=f3e141]:
+                  - link "Contact Us" [ref=f3e142] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/contact/
+        - navigation [ref=f3e147]:
+          - link "Home" [ref=f3e148] [cursor=pointer]:
+            - /url: https://demo.testarchitect.com
+          - generic [ref=f3e149]: 
+          - link "Printers" [ref=f3e151] [cursor=pointer]:
+            - /url: https://demo.testarchitect.com/product-category/printers/
+          - text: 
+        - generic [ref=f3e153]:
+          - generic [ref=f3e156]:
+            - generic [ref=f3e158]:
+              - generic [ref=f3e160]:
+                - group "1 / 4" [ref=f3e161]:
+                  - link [ref=f3e163]:
+                    - /url: https://demo.testarchitect.com/wp-content/uploads/2016/10/53.jpg
+                    - img "53" [ref=f3e164]
+                - group "2 / 4" [ref=f3e165]:
+                  - link [ref=f3e167]:
+                    - /url: https://demo.testarchitect.com/wp-content/uploads/2016/10/54.jpg
+                    - img "54" [ref=f3e168]
+                - group "3 / 4" [ref=f3e169]:
+                  - link [ref=f3e171]:
+                    - /url: https://demo.testarchitect.com/wp-content/uploads/2016/10/55.jpg
+                    - img "55" [ref=f3e172]
+                - group "4 / 4" [ref=f3e173]:
+                  - link [ref=f3e175]:
+                    - /url: https://demo.testarchitect.com/wp-content/uploads/2016/10/56.jpg
+                    - img "56" [ref=f3e176]
+              - list [ref=f3e178]:
+                - group "1 / 4" [ref=f3e179]:
+                  - generic "53" [ref=f3e180] [cursor=pointer]
+                - group "2 / 4" [ref=f3e181]:
+                  - generic "54" [ref=f3e182] [cursor=pointer]
+                - group "3 / 4" [ref=f3e183]:
+                  - generic "55" [ref=f3e184] [cursor=pointer]
+                - group "4 / 4" [ref=f3e185]:
+                  - generic "56" [ref=f3e186] [cursor=pointer]
+            - generic [ref=f3e189]:
+              - heading "Canon i-SENSYS LBP6030W with Wi-Fi" [level=1] [ref=f3e190]
+              - paragraph [ref=f3e191]:
+                - generic [ref=f3e192]: $290.00
+              - generic [ref=f3e194]:
+                - img "Rated 5.00 out of 5" [ref=f3e195]:
+                  - text: 󩌍󩌍󩌍󩌍󩌍
+                  - generic [ref=f3e196]:
+                    - text: 󩌍󩌍󩌍󩌍󩌍 Rated
+                    - strong: "5.00"
+                    - text: out of 5 based on
+                    - generic [ref=f3e197]: 󩌍󩌍󩌍󩌍󩌍 1
+                    - text: customer rating
+                - link "(1 customer review)" [ref=f3e198] [cursor=pointer]:
+                  - /url: "#reviews"
+              - paragraph [ref=f3e200]: Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet. Elit, eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet. ipsum dolor sit amet. Elit, eiusmod tempor.
+              - generic [ref=f3e201]:
+                - generic [ref=f3e202]: 
+                - text: 10 people are viewing this product right now
+              - generic [ref=f3e203]:
+                - generic [ref=f3e204]:
+                  - generic [ref=f3e205] [cursor=pointer]: 
+                  - generic [ref=f3e207]: Canon i-SENSYS LBP6030W with Wi-Fi quantity
+                  - spinbutton "Canon i-SENSYS LBP6030W with Wi-Fi quantity" [ref=f3e208]: "1"
+                  - generic [ref=f3e209] [cursor=pointer]: 
+                - button "Add to cart" [ref=f3e211] [cursor=pointer]
+              - paragraph
+              - link "  Add to wishlist" [ref=f3e214] [cursor=pointer]:
+                - /url: "?add_to_wishlist=4357&_wpnonce=414b605dae"
+                - text: 
+                - generic [ref=f3e215]: 
+                - text: Add to wishlist
+              - link " Compare" [ref=f3e216] [cursor=pointer]:
+                - /url: https://demo.testarchitect.com?action=yith-woocompare-add-product&id=4357
+              - generic [ref=f3e217]:
+                - generic [ref=f3e219]:
+                  - text: "Category:"
+                  - link "Printers" [ref=f3e220] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/printers/
+                - generic [ref=f3e221]:
+                  - text: "Tags:"
+                  - link "accessories" [ref=f3e222] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-tag/accessories/
+                  - text: ","
+                  - link "best trend" [ref=f3e223] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-tag/best-trend/
+                  - text: ","
+                  - link "fashion" [ref=f3e224] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-tag/fashion/
+                  - text: ","
+                  - link "new" [ref=f3e225] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-tag/new/
+              - generic [ref=f3e226]:
+                - generic [ref=f3e227]: "Share:"
+                - list [ref=f3e228]:
+                  - listitem [ref=f3e229]:
+                    - link "ภ" [ref=f3e230] [cursor=pointer]:
+                      - /url: https://twitter.com/share?url=https://demo.testarchitect.com/product/canon-i-sensys-lbp6030w-with-wi-fi/&text=Canon%20i-SENSYS%20LBP6030W%20with%20Wi-Fi
+                  - listitem [ref=f3e232]:
+                    - link "ฐ" [ref=f3e233] [cursor=pointer]:
+                      - /url: https://www.facebook.com/sharer.php?u=https://demo.testarchitect.com/product/canon-i-sensys-lbp6030w-with-wi-fi/&images=https://demo.testarchitect.com/wp-content/uploads/2016/10/53.jpg
+                  - listitem [ref=f3e235]:
+                    - link "ย" [ref=f3e236] [cursor=pointer]:
+                      - /url: https://vk.com/share.php?url=https://demo.testarchitect.com/product/canon-i-sensys-lbp6030w-with-wi-fi/&image=https://demo.testarchitect.com/wp-content/uploads/2016/10/53.jpg?&title=Canon%20i-SENSYS%20LBP6030W%20with%20Wi-Fi
+                  - listitem [ref=f3e238]:
+                    - link "ถ" [ref=f3e239] [cursor=pointer]:
+                      - /url: https://pinterest.com/pin/create/button/?url=https://demo.testarchitect.com/product/canon-i-sensys-lbp6030w-with-wi-fi/&media=https://demo.testarchitect.com/wp-content/uploads/2016/10/53.jpg&description=Canon%20i-SENSYS%20LBP6030W%20with%20Wi-Fi
+                  - listitem [ref=f3e241]:
+                    - link "" [ref=f3e242] [cursor=pointer]:
+                      - /url: mailto:enteryour@addresshere.com?subject=Canon%20i-SENSYS%20LBP6030W%20with%20Wi-Fi&body=Check%20this%20out:%20https://demo.testarchitect.com/product/canon-i-sensys-lbp6030w-with-wi-fi/
+                  - listitem [ref=f3e244]:
+                    - link "ท" [ref=f3e245] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/shareArticle?mini=true&url=https://demo.testarchitect.com/product/canon-i-sensys-lbp6030w-with-wi-fi/&title=
+                  - listitem [ref=f3e247]:
+                    - link "ล" [ref=f3e248] [cursor=pointer]:
+                      - /url: https://api.whatsapp.com/send?text=https://demo.testarchitect.com/product/canon-i-sensys-lbp6030w-with-wi-fi/
+                  - listitem [ref=f3e250]:
+                    - link "ฤ" [ref=f3e251] [cursor=pointer]:
+                      - /url: https://web.skype.com/share?url=https://demo.testarchitect.com/product/canon-i-sensys-lbp6030w-with-wi-fi/
+          - generic [ref=f3e253]:
+            - list [ref=f3e254]:
+              - listitem [ref=f3e255]:
+                - link "Description" [ref=f3e256] [cursor=pointer]:
+                  - /url: "#tab_description"
+              - listitem [ref=f3e257]:
+                - link "Reviews (1)" [active] [ref=f3e258] [cursor=pointer]:
+                  - /url: "#tab_reviews"
+            - generic [ref=f3e262]:
+              - generic [ref=f3e263]: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+              - generic [ref=f3e278]:
+                - heading "Product Informations" [level=4] [ref=f3e279]
+                - generic [ref=f3e280]:
+                  - strong [ref=f3e281]: "Other Features:"
+                  - text: Bluetooth, Charging, With Mic, Stereo Bluetooth
+                  - strong [ref=f3e282]: "Form Factor:"
+                  - text: In Ear
+                  - strong [ref=f3e283]: "Connections:"
+                  - text: Bluetooth, Wireless
+                  - strong [ref=f3e284]: Bluetooth
+                  - text: Compatiblity
+                  - strong [ref=f3e285]: ":"
+                  - text: Bluetooth 4.0
+                  - strong [ref=f3e286]: "Drivers:"
+                  - text: 14 mm drivers
+                  - strong [ref=f3e287]: "Power Source :"
+                  - text: Battery Power
+                  - strong [ref=f3e288]: "Batteries:"
+                  - text: Rechargeable Lithium-Ion
+                  - strong [ref=f3e289]: "Battery life:"
+                  - text: Up to eight hours of playing time.
+              - generic [ref=f3e290]: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            - text: 󩌍󩌍󩌍󩌍󩌍 󩌍󩌍󩌍󩌍󩌍 󩌍 󩌍󩌍 󩌍󩌍󩌍 󩌍󩌍󩌍󩌍 󩌍󩌍󩌍󩌍󩌍
+          - text:  
+          - heading "Related products" [level=2] [ref=f3e296]
+          - generic [ref=f3e299]:
+            - group "1 / 10" [ref=f3e300]:
+              - generic [ref=f3e302]:
+                - generic [ref=f3e303]:
+                  - link [ref=f3e304] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product/ue-megaboom-portable-wireless-speaker/
+                  - contentinfo [ref=f3e306]:
+                    - generic [ref=f3e307] [cursor=pointer]:  Quick View
+                    - link "Add “UE Megaboom Portable Wireless Speaker” to your cart" [ref=f3e308] [cursor=pointer]:
+                      - /url: "?add-to-cart=4070"
+                      - text:  Add to cart
+                    - link " Add to wishlist" [ref=f3e312] [cursor=pointer]:
+                      - /url: "?add_to_wishlist=4070&_wpnonce=414b605dae"
+                      - text:  
+                      - generic: Add to wishlist
+                - generic [ref=f3e313]:
+                  - link "Electronic Components & Supplies" [ref=f3e315] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/electronic-components-supplies/
+                  - heading [level=2] [ref=f3e316]:
+                    - link "UE Megaboom Portable Wireless Speaker" [ref=f3e317] [cursor=pointer]:
+                      - /url: https://demo.testarchitect.com/product/ue-megaboom-portable-wireless-speaker/
+                  - img "Rated 5.00 out of 5" [ref=f3e318]:
+                    - text: 󩌍󩌍󩌍󩌍󩌍
+                    - generic [ref=f3e319]:
+                      - text: 󩌍󩌍󩌍󩌍󩌍 Rated
+                      - strong: "5.00"
+                      - text: out of 5
+                  - generic [ref=f3e320]: $399.00
+                  - link "Add “UE Megaboom Portable Wireless Speaker” to your cart" [ref=f3e323] [cursor=pointer]:
+                    - /url: "?add-to-cart=4070"
+                    - text: Add to cart
+            - group "2 / 10" [ref=f3e324]:
+              - generic [ref=f3e326]:
+                - generic [ref=f3e327]:
+                  - link [ref=f3e328] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product/hp-laserjet-m127fw-with-wi-fi/
+                  - contentinfo [ref=f3e330]:
+                    - generic [ref=f3e331] [cursor=pointer]:  Quick View
+                    - link "Add “HP LaserJet M127fw with Wi-Fi” to your cart" [ref=f3e332] [cursor=pointer]:
+                      - /url: "?add-to-cart=4349"
+                      - text:  Add to cart
+                    - link " Add to wishlist" [ref=f3e336] [cursor=pointer]:
+                      - /url: "?add_to_wishlist=4349&_wpnonce=414b605dae"
+                      - text:  
+                      - generic: Add to wishlist
+                - generic [ref=f3e337]:
+                  - link "Printers" [ref=f3e339] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/printers/
+                  - heading [level=2] [ref=f3e340]:
+                    - link "HP LaserJet M127fw with Wi-Fi" [ref=f3e341] [cursor=pointer]:
+                      - /url: https://demo.testarchitect.com/product/hp-laserjet-m127fw-with-wi-fi/
+                  - img "Rated 5.00 out of 5" [ref=f3e342]:
+                    - text: 󩌍󩌍󩌍󩌍󩌍
+                    - generic [ref=f3e343]:
+                      - text: 󩌍󩌍󩌍󩌍󩌍 Rated
+                      - strong: "5.00"
+                      - text: out of 5
+                  - generic [ref=f3e344]: $290.00
+                  - link "Add “HP LaserJet M127fw with Wi-Fi” to your cart" [ref=f3e347] [cursor=pointer]:
+                    - /url: "?add-to-cart=4349"
+                    - text: Add to cart
+            - group "3 / 10" [ref=f3e348]:
+              - generic [ref=f3e350]:
+                - generic [ref=f3e351]:
+                  - link [ref=f3e352] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product/hp-laserjet-p1102-ce651a/
+                  - contentinfo [ref=f3e354]:
+                    - generic [ref=f3e355] [cursor=pointer]:  Quick View
+                    - link "Add “HP LaserJet P1102 (CE651A)” to your cart" [ref=f3e356] [cursor=pointer]:
+                      - /url: "?add-to-cart=4322"
+                      - text:  Add to cart
+                    - link " Add to wishlist" [ref=f3e360] [cursor=pointer]:
+                      - /url: "?add_to_wishlist=4322&_wpnonce=414b605dae"
+                      - text:  
+                      - generic: Add to wishlist
+                - generic [ref=f3e361]:
+                  - link "Optical Drives" [ref=f3e363] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/optical-drives/
+                  - heading [level=2] [ref=f3e364]:
+                    - link "HP LaserJet P1102 (CE651A)" [ref=f3e365] [cursor=pointer]:
+                      - /url: https://demo.testarchitect.com/product/hp-laserjet-p1102-ce651a/
+                  - img "Rated 5.00 out of 5" [ref=f3e366]:
+                    - text: 󩌍󩌍󩌍󩌍󩌍
+                    - generic [ref=f3e367]:
+                      - text: 󩌍󩌍󩌍󩌍󩌍 Rated
+                      - strong: "5.00"
+                      - text: out of 5
+                  - generic [ref=f3e368]: $290.00
+                  - link "Add “HP LaserJet P1102 (CE651A)” to your cart" [ref=f3e371] [cursor=pointer]:
+                    - /url: "?add-to-cart=4322"
+                    - text: Add to cart
+            - group "4 / 10" [ref=f3e372]:
+              - generic [ref=f3e374]:
+                - generic [ref=f3e375]:
+                  - link [ref=f3e376] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product/bose-boundlink-mini/
+                  - contentinfo [ref=f3e378]:
+                    - generic [ref=f3e379] [cursor=pointer]:  Quick View
+                    - link "Add “Bose SoundLink Mini” to your cart" [ref=f3e380] [cursor=pointer]:
+                      - /url: "?add-to-cart=4067"
+                      - text:  Add to cart
+                    - link " Add to wishlist" [ref=f3e384] [cursor=pointer]:
+                      - /url: "?add_to_wishlist=4067&_wpnonce=414b605dae"
+                      - text:  
+                      - generic: Add to wishlist
+                - generic [ref=f3e385]:
+                  - link "Engine" [ref=f3e387] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/engine/
+                  - heading [level=2] [ref=f3e388]:
+                    - link "Bose SoundLink Mini" [ref=f3e389] [cursor=pointer]:
+                      - /url: https://demo.testarchitect.com/product/bose-boundlink-mini/
+                  - img "Rated 5.00 out of 5" [ref=f3e390]:
+                    - text: 󩌍󩌍󩌍󩌍󩌍
+                    - generic [ref=f3e391]:
+                      - text: 󩌍󩌍󩌍󩌍󩌍 Rated
+                      - strong: "5.00"
+                      - text: out of 5
+                  - generic [ref=f3e392]: $599.00
+                  - link "Add “Bose SoundLink Mini” to your cart" [ref=f3e395] [cursor=pointer]:
+                    - /url: "?add-to-cart=4067"
+                    - text: Add to cart
+            - group "5 / 10" [ref=f3e396]:
+              - generic [ref=f3e398]:
+                - generic [ref=f3e399]:
+                  - link [ref=f3e400] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product/robotic-arm-edge/
+                  - contentinfo [ref=f3e402]:
+                    - generic [ref=f3e403] [cursor=pointer]:  Quick View
+                    - link "Add “Robotic Arm Edge” to your cart" [ref=f3e404] [cursor=pointer]:
+                      - /url: "?add-to-cart=4324"
+                      - text:  Add to cart
+                    - link " Add to wishlist" [ref=f3e408] [cursor=pointer]:
+                      - /url: "?add_to_wishlist=4324&_wpnonce=414b605dae"
+                      - text:  
+                      - generic: Add to wishlist
+                - generic [ref=f3e409]:
+                  - link "Smart Home Controls" [ref=f3e411] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/smart-home-controls/
+                  - heading [level=2] [ref=f3e412]:
+                    - link "Robotic Arm Edge" [ref=f3e413] [cursor=pointer]:
+                      - /url: https://demo.testarchitect.com/product/robotic-arm-edge/
+                  - img "Rated 5.00 out of 5" [ref=f3e414]:
+                    - text: 󩌍󩌍󩌍󩌍󩌍
+                    - generic [ref=f3e415]:
+                      - text: 󩌍󩌍󩌍󩌍󩌍 Rated
+                      - strong: "5.00"
+                      - text: out of 5
+                  - generic [ref=f3e416]: $290.00
+                  - link "Add “Robotic Arm Edge” to your cart" [ref=f3e419] [cursor=pointer]:
+                    - /url: "?add-to-cart=4324"
+                    - text: Add to cart
+            - group "6 / 10" [ref=f3e420]:
+              - generic [ref=f3e422]:
+                - generic [ref=f3e423]:
+                  - link [ref=f3e424] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product/exolens-with-optics-by-zeiss/
+                  - contentinfo [ref=f3e426]:
+                    - generic [ref=f3e427] [cursor=pointer]:  Quick View
+                    - link "Add “ExoLens with Optics by ZEISS” to your cart" [ref=f3e428] [cursor=pointer]:
+                      - /url: "?add-to-cart=4368"
+                      - text:  Add to cart
+                    - link " Add to wishlist" [ref=f3e432] [cursor=pointer]:
+                      - /url: "?add_to_wishlist=4368&_wpnonce=414b605dae"
+                      - text:  
+                      - generic: Add to wishlist
+                - generic [ref=f3e433]:
+                  - link "Camera & Photo" [ref=f3e435] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/camera-photo/
+                  - heading [level=2] [ref=f3e436]:
+                    - link "ExoLens with Optics by ZEISS" [ref=f3e437] [cursor=pointer]:
+                      - /url: https://demo.testarchitect.com/product/exolens-with-optics-by-zeiss/
+                  - img "Rated 5.00 out of 5" [ref=f3e438]:
+                    - text: 󩌍󩌍󩌍󩌍󩌍
+                    - generic [ref=f3e439]:
+                      - text: 󩌍󩌍󩌍󩌍󩌍 Rated
+                      - strong: "5.00"
+                      - text: out of 5
+                  - generic [ref=f3e440]: $399.00
+                  - link "Add “ExoLens with Optics by ZEISS” to your cart" [ref=f3e443] [cursor=pointer]:
+                    - /url: "?add-to-cart=4368"
+                    - text: Add to cart
+            - group "7 / 10" [ref=f3e444]:
+              - generic [ref=f3e446]:
+                - generic [ref=f3e447]:
+                  - link [ref=f3e448] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product/dji-mavic-pro-camera-drone/
+                  - contentinfo [ref=f3e450]:
+                    - generic [ref=f3e451] [cursor=pointer]:  Quick View
+                    - link "Add “DJI Mavic Pro Camera Drone” to your cart" [ref=f3e452] [cursor=pointer]:
+                      - /url: "?add-to-cart=4373"
+                      - text:  Add to cart
+                    - link " Add to wishlist" [ref=f3e456] [cursor=pointer]:
+                      - /url: "?add_to_wishlist=4373&_wpnonce=414b605dae"
+                      - text:  
+                      - generic: Add to wishlist
+                - generic [ref=f3e457]:
+                  - link "Accessory Bundles" [ref=f3e459] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/accessory-bundles/
+                  - heading [level=2] [ref=f3e460]:
+                    - link "DJI Mavic Pro Camera Drone" [ref=f3e461] [cursor=pointer]:
+                      - /url: https://demo.testarchitect.com/product/dji-mavic-pro-camera-drone/
+                  - img "Rated 5.00 out of 5" [ref=f3e462]:
+                    - text: 󩌍󩌍󩌍󩌍󩌍
+                    - generic [ref=f3e463]:
+                      - text: 󩌍󩌍󩌍󩌍󩌍 Rated
+                      - strong: "5.00"
+                      - text: out of 5
+                  - generic [ref=f3e464]: $129.00
+                  - link "Add “DJI Mavic Pro Camera Drone” to your cart" [ref=f3e467] [cursor=pointer]:
+                    - /url: "?add-to-cart=4373"
+                    - text: Add to cart
+            - group "8 / 10" [ref=f3e468]:
+              - generic [ref=f3e470]:
+                - generic: Sale
+                - generic [ref=f3e472]:
+                  - link [ref=f3e473] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product/bose-quietcomfort-35/
+                  - contentinfo [ref=f3e475]:
+                    - generic [ref=f3e476] [cursor=pointer]:  Quick View
+                    - link "Add “Bose® 35 Wireless Headphones” to your cart" [ref=f3e477] [cursor=pointer]:
+                      - /url: "?add-to-cart=4068"
+                      - text:  Add to cart
+                    - link " Add to wishlist" [ref=f3e481] [cursor=pointer]:
+                      - /url: "?add_to_wishlist=4068&_wpnonce=414b605dae"
+                      - text:  
+                      - generic: Add to wishlist
+                - generic [ref=f3e482]:
+                  - link "MP3 / MP4 Player Accessories" [ref=f3e484] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/mp3-mp4-player-accessories/
+                  - heading [level=2] [ref=f3e485]:
+                    - link "Bose® 35 Wireless Headphones" [ref=f3e486] [cursor=pointer]:
+                      - /url: https://demo.testarchitect.com/product/bose-quietcomfort-35/
+                  - img "Rated 5.00 out of 5" [ref=f3e487]:
+                    - text: 󩌍󩌍󩌍󩌍󩌍
+                    - generic [ref=f3e488]:
+                      - text: 󩌍󩌍󩌍󩌍󩌍 Rated
+                      - strong: "5.00"
+                      - text: out of 5
+                  - generic [ref=f3e489]:
+                    - deletion [ref=f3e490]:
+                      - generic [ref=f3e491]: $1,999.00
+                    - insertion [ref=f3e493]:
+                      - generic [ref=f3e494]: $1,000.00
+                  - link "Add “Bose® 35 Wireless Headphones” to your cart" [ref=f3e496] [cursor=pointer]:
+                    - /url: "?add-to-cart=4068"
+                    - text: Add to cart
+            - group "9 / 10" [ref=f3e497]:
+              - generic [ref=f3e499]:
+                - generic: Sale
+                - generic [ref=f3e501]:
+                  - link [ref=f3e502] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product/beats-studio-wireless-over-ear/
+                  - contentinfo [ref=f3e504]:
+                    - generic [ref=f3e505] [cursor=pointer]:  Quick View
+                    - link "Add “Beats Studio Wireless Over-Ear” to your cart" [ref=f3e506] [cursor=pointer]:
+                      - /url: "?add-to-cart=4065"
+                      - text:  Add to cart
+                    - link " Add to wishlist" [ref=f3e510] [cursor=pointer]:
+                      - /url: "?add_to_wishlist=4065&_wpnonce=414b605dae"
+                      - text:  
+                      - generic: Add to wishlist
+                - generic [ref=f3e511]:
+                  - link "MP3 / MP4 Player Accessories" [ref=f3e513] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/mp3-mp4-player-accessories/
+                  - heading [level=2] [ref=f3e514]:
+                    - link "Beats Studio Wireless Over-Ear" [ref=f3e515] [cursor=pointer]:
+                      - /url: https://demo.testarchitect.com/product/beats-studio-wireless-over-ear/
+                  - img "Rated 5.00 out of 5" [ref=f3e516]:
+                    - text: 󩌍󩌍󩌍󩌍󩌍
+                    - generic [ref=f3e517]:
+                      - text: 󩌍󩌍󩌍󩌍󩌍 Rated
+                      - strong: "5.00"
+                      - text: out of 5
+                  - generic [ref=f3e518]:
+                    - deletion [ref=f3e519]:
+                      - generic [ref=f3e520]: $299.00
+                    - insertion [ref=f3e522]:
+                      - generic [ref=f3e523]: $150.00
+                  - link "Add “Beats Studio Wireless Over-Ear” to your cart" [ref=f3e525] [cursor=pointer]:
+                    - /url: "?add-to-cart=4065"
+                    - text: Add to cart
+            - group "10 / 10" [ref=f3e526]:
+              - generic [ref=f3e528]:
+                - generic [ref=f3e529]:
+                  - link [ref=f3e530] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product/roboxplorer-robotic/
+                  - contentinfo [ref=f3e532]:
+                    - generic [ref=f3e533] [cursor=pointer]:  Quick View
+                    - link "Add “RoboXplorer Robotic” to your cart" [ref=f3e534] [cursor=pointer]:
+                      - /url: "?add-to-cart=4323"
+                      - text:  Add to cart
+                    - link " Add to wishlist" [ref=f3e538] [cursor=pointer]:
+                      - /url: "?add_to_wishlist=4323&_wpnonce=414b605dae"
+                      - text:  
+                      - generic: Add to wishlist
+                - generic [ref=f3e539]:
+                  - link "Engine" [ref=f3e541] [cursor=pointer]:
+                    - /url: https://demo.testarchitect.com/product-category/engine/
+                  - heading [level=2] [ref=f3e542]:
+                    - link "RoboXplorer Robotic" [ref=f3e543] [cursor=pointer]:
+                      - /url: https://demo.testarchitect.com/product/roboxplorer-robotic/
+                  - img "Rated 5.00 out of 5" [ref=f3e544]:
+                    - text: 󩌍󩌍󩌍󩌍󩌍
+                    - generic [ref=f3e545]:
+                      - text: 󩌍󩌍󩌍󩌍󩌍 Rated
+                      - strong: "5.00"
+                      - text: out of 5
+                  - generic [ref=f3e546]: $290.00
+                  - link "Add “RoboXplorer Robotic” to your cart" [ref=f3e549] [cursor=pointer]:
+                    - /url: "?add-to-cart=4323"
+                    - text: Add to cart
+        - contentinfo [ref=f3e550]
+      - generic [ref=f3e564]:
+        - contentinfo [ref=f3e565]:
+          - generic [ref=f3e572]:
+            - img "talogoblue" [ref=f3e577]
+            - generic [ref=f3e583]:
+              - link "About Us" [ref=f3e584] [cursor=pointer]:
+                - /url: /about-us/
+              - link "Shop" [ref=f3e585] [cursor=pointer]:
+                - /url: /shop/
+              - link "Offers" [ref=f3e586] [cursor=pointer]:
+                - /url: /electronic-components-supplies/
+              - link "Blog" [ref=f3e587] [cursor=pointer]:
+                - /url: /blog/
+              - link "Contact Us" [ref=f3e588] [cursor=pointer]:
+                - /url: /contact/
+        - generic [ref=f3e589]: Copyright © 2021 LogiGear Corporation. All rights reserved.
+    - generic [ref=f3e599] [cursor=pointer]: 
+    - text:   
+  - generic [ref=f3e603]: widescreen
+  - dialog "Cookie Notice" [ref=f3e604]:
+    - generic [ref=f3e605]:
+      - generic [ref=f3e606]: We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it.
+      - link "Ok" [ref=f3e608] [cursor=pointer]:
+        - /url: "#"
+      - generic "No" [ref=f3e609] [cursor=pointer]
+```
+
+# Test source
+
+```ts
+  1  | import { Page, Locator, expect } from '@playwright/test';
+  2  | 
+  3  | export class ProductDetailPage {
+  4  |   readonly page: Page;
+  5  |   readonly reviewsTab: Locator;
+  6  |   readonly starRating: Locator;
+  7  |   readonly reviewTextbox: Locator;
+  8  |   readonly submitBtn: Locator;
+  9  |   readonly reviewList: Locator;
+  10 | 
+  11 |   constructor(page: Page) {
+  12 |     this.page = page;
+  13 |     this.reviewsTab = page.getByRole('link', { name: /Reviews/i });
+  14 |     this.starRating = page.locator('.star-5'); 
+  15 |     this.reviewTextbox = page.getByRole('textbox', { name: /Your review/i });
+  16 |     this.submitBtn = page.getByRole('button', { name: 'Submit' });
+  17 |     this.reviewList = page.locator('#comments .commentlist'); 
+  18 |   }
+  19 | 
+  20 |   async goToReviewsTab() {
+  21 |     await this.reviewsTab.click({ force: true });
+  22 |     // Bắt buộc chờ phần panel bình luận hiện ra
+  23 |     await this.page.waitForSelector('#comments', { state: 'visible', timeout: 10000 });
+  24 |   }
+  25 | 
+  26 |   async submitReview(reviewText: string) {
+> 27 |     await this.page.locator('.stars a.star-5').click({ force: true });
+     |                                                ^ Error: locator.click: Element is not visible
+  28 |     await this.reviewTextbox.click({ force: true }); 
+  29 |     await this.reviewTextbox.fill(reviewText);
+  30 |     await this.submitBtn.click({ force: true });
+  31 |   }
+  32 | 
+  33 |   async verifyReviewDisplays(expectedText: string) {
+  34 |     await this.page.waitForLoadState('domcontentloaded');
+  35 |     await expect(this.page.locator('body')).toContainText(expectedText, { timeout: 15000 });
+  36 |   }
+  37 | }
+```
