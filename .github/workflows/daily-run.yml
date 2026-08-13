@@ -2,9 +2,8 @@ name: Daily Playwright Tests
 
 on:
   schedule:
-    # Chạy tự động vào lúc 17:00 UTC mỗi ngày (tương đương 00:00 nửa đêm giờ Việt Nam)
     - cron: '0 17 * * *'
-  workflow_dispatch: # Nút ma thuật để bạn có thể bấm chạy thủ công trên web GitHub bất cứ lúc nào
+  workflow_dispatch: 
 
 jobs:
   test-and-report:
@@ -18,7 +17,7 @@ jobs:
     - name: Thiết lập môi trường Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 18
+        node-version: 20
 
     - name: Cài đặt thư viện (Bao gồm Playwright & Allure)
       run: npm install
@@ -28,7 +27,7 @@ jobs:
 
     - name: Chạy Test Suites
       run: npx playwright test --project=chromium
-      continue-on-error: true # Bắt buộc phải có dòng này để dù test Fail, nó vẫn chạy tiếp step tạo Report
+      continue-on-error: true 
 
     - name: Khởi tạo Allure Report
       run: npx allure generate allure-results --clean -o allure-report
@@ -38,4 +37,4 @@ jobs:
       with:
         name: Daily-Allure-Report
         path: allure-report/
-        retention-days: 7 # Lưu file ZIP trong 7 ngày
+        retention-days: 7 
