@@ -26,7 +26,7 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Chạy Test Suites
-      run: npx playwright test --project=chromium --reporter=allure-playwright
+      run: npx playwright test --project=chromium
       continue-on-error: true
 
     - name: Khởi tạo Allure Report
