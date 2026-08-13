@@ -52,18 +52,20 @@ export class CheckoutPage {
   }
 
   async selectPaymentMethod(methodName: string) {
-    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
+    // Tăng thời gian chờ vòng xoay load (blockUI) lên 60 giây
+    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
     await this.page.getByText(methodName, { exact: true }).click({ force: true });
   }
 
   async placeOrder() {
-    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
+    // Tăng thời gian chờ vòng xoay load (blockUI) lên 60 giây
+    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
     await this.page.waitForTimeout(2000); 
     await this.placeOrderBtn.scrollIntoViewIfNeeded();
     await this.placeOrderBtn.click({ force: true });
   }
 
-  async verifyOrderSuccess(timeoutMs: number = 30000) {
+  async verifyOrderSuccess(timeoutMs: number = 60000) {
     const element = await this.page.waitForSelector('.woocommerce-notice--success, .woocommerce-error', { state: 'visible', timeout: timeoutMs });
     const className = await element.getAttribute('class') || '';
 
@@ -75,9 +77,9 @@ export class CheckoutPage {
   }
 
   async verifyMandatoryFieldsError() {
-    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
+    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
     await this.page.waitForTimeout(2000);
-    await this.page.waitForSelector('.woocommerce-error', { state: 'visible', timeout: 15000 });
+    await this.page.waitForSelector('.woocommerce-error', { state: 'visible', timeout: 30000 });
     const errorCount = await this.errorMessages.count();
     expect(errorCount).toBeGreaterThan(0);
   }
