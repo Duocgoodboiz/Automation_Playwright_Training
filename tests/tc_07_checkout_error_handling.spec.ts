@@ -1,13 +1,16 @@
 import { test } from '../fixtures/authFixture';
 
 test('TC_07 - Ensure proper error handling when mandatory fields are blank', async ({ 
+  myAccountPage,
   homePage, 
   shopPage, 
   cartPage, 
   checkoutPage 
 }) => {
-  test.setTimeout(60000);
+  test.setTimeout(120000);
   
+  await myAccountPage.registerRandomAccount();
+
   await homePage.goToShop();
   await shopPage.switchToListView();
   await shopPage.addFirstItemToCart();

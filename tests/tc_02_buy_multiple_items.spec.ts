@@ -2,12 +2,15 @@ import { test } from '../fixtures/authFixture';
 import billingData from '../data/billing.json';
 
 test('TC_02 - Verify users can buy multiple items successfully', async ({ 
+  myAccountPage,
   homePage, 
   shopPage, 
   cartPage, 
   checkoutPage 
 }) => {
-  test.setTimeout(80000);
+  test.setTimeout(150000);
+
+  await myAccountPage.registerRandomAccount();
 
   await homePage.goToShop();
   await shopPage.switchToListView();

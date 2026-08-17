@@ -13,6 +13,7 @@ export class CartPage {
   readonly updateCartBtn: Locator;
   readonly productPrice: Locator;
   readonly subtotalPrice: Locator;
+  readonly blockUI: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -27,6 +28,7 @@ export class CartPage {
     this.updateCartBtn = page.getByRole('button', { name: /update cart/i });
     this.productPrice = page.locator('td.product-price bdi').first();
     this.subtotalPrice = page.locator('td.product-subtotal bdi').first();
+    this.blockUI = page.locator('.blockUI');
   }
 
   async verifyItemInCart() {
@@ -44,7 +46,8 @@ export class CartPage {
     });
 
     await this.clearCartBtn.click();
-    await this.page.waitForTimeout(2000); 
+    
+    await this.page.waitForLoadState('networkidle'); 
   }
 
   async verifyCartIsEmpty() {
@@ -68,15 +71,20 @@ export class CartPage {
   }
 
   async changeQuantity(action: 'plus' | 'minus' | 'input', value?: string) {
+    await this.blockUI.waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
+
     if (action === 'plus') {
       await this.plusBtn.first().click();
     } else if (action === 'minus') {
       await this.minusBtn.first().click();
     } else if (action === 'input' && value) {
       await this.qtyInput.first().fill(value);
-      await this.qtyInput.first().press('Enter');
     }
 
-    await this.updateCartBtn.click({ force: true });
+    await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
+    await this.updateCartBtn.scrollIntoViewIfNeeded();
+    await this.updateCartBtn.click();
+    
+    await this.blockUI.waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
   }
 }

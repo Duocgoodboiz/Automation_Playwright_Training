@@ -52,17 +52,18 @@ export class CheckoutPage {
   }
 
   async selectPaymentMethod(methodName: string) {
-    // Tăng thời gian chờ vòng xoay load (blockUI) lên 60 giây
     await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
-    await this.page.getByText(methodName, { exact: true }).click({ force: true });
+    
+    const methodOption = this.page.getByText(methodName, { exact: true });
+    await methodOption.scrollIntoViewIfNeeded();
+    await methodOption.click();
   }
 
   async placeOrder() {
-    // Tăng thời gian chờ vòng xoay load (blockUI) lên 60 giây
     await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
-    await this.page.waitForTimeout(2000); 
+    
     await this.placeOrderBtn.scrollIntoViewIfNeeded();
-    await this.placeOrderBtn.click({ force: true });
+    await this.placeOrderBtn.click();
   }
 
   async verifyOrderSuccess(timeoutMs: number = 60000) {
@@ -71,14 +72,14 @@ export class CheckoutPage {
 
     if (className.includes('woocommerce-error')) {
       const errorText = await element.innerText();
-      throw new Error(`Test FAIL do Server Demo từ chối đơn hàng với lý do: ${errorText}`);
+      throw new Error(`Test FAILED because the Demo Server rejected the order with reason: ${errorText}`);
     }
     await expect(this.page.getByRole('heading', { name: 'Order details' })).toBeVisible();
   }
 
   async verifyMandatoryFieldsError() {
     await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
-    await this.page.waitForTimeout(2000);
+
     await this.page.waitForSelector('.woocommerce-error', { state: 'visible', timeout: 30000 });
     const errorCount = await this.errorMessages.count();
     expect(errorCount).toBeGreaterThan(0);

@@ -5,14 +5,34 @@ export class MyAccountPage {
   readonly ordersLink: Locator;
   readonly ordersTable: Locator;
   readonly orderRows: Locator;
+  
+  readonly loginSignUpMenu: Locator;
+  readonly regEmailInput: Locator;
+  readonly registerBtn: Locator;
 
   constructor(page: Page) {
     this.page = page;
     
-    this.ordersLink = page.locator('.woocommerce-MyAccount-navigation-link--orders a');
+    this.ordersLink = page.getByRole('link', { name: /orders/i }).first(); 
     
     this.ordersTable = page.locator('table.woocommerce-orders-table');
     this.orderRows = page.locator('table.woocommerce-orders-table tbody tr.woocommerce-orders-table__row');
+
+    this.loginSignUpMenu = page.getByRole('link', { name: 'Log in / Sign up' });
+    this.regEmailInput = page.locator('#reg_email');
+    this.registerBtn = page.getByRole('button', { name: 'Register' });
+  }
+
+  async registerRandomAccount() {
+    await this.loginSignUpMenu.click();
+    
+    const randomEmail = `USER_AUTO_${Date.now()}@gmail.com`;
+    await this.regEmailInput.fill(randomEmail);
+    
+    await this.registerBtn.scrollIntoViewIfNeeded();
+    await this.registerBtn.click();
+    
+    await this.page.waitForURL('**/my-account/**');
   }
 
   async goToOrdersTab() {
@@ -23,7 +43,8 @@ export class MyAccountPage {
     await expect(this.ordersTable).toBeVisible({ timeout: 15000 });
     
     const actualOrderCount = await this.orderRows.count();
-    console.log(`Số lượng đơn hàng hiện tại: ${actualOrderCount}`);
+    console.log(`Current order count: ${actualOrderCount}`);
+    
     expect(actualOrderCount).toBeGreaterThanOrEqual(expectedMinimumOrders);
   }
 }

@@ -26,7 +26,6 @@ export class ProductDetailPage {
     await this.reviewsTab.click();
     
     await this.page.waitForSelector('#review_form_wrapper', { state: 'visible', timeout: 30000 });
-    await this.page.waitForTimeout(500);
   }
 
   async submitReview(reviewText: string) {
@@ -44,6 +43,6 @@ export class ProductDetailPage {
   }
 
   async verifyReviewDisplays(expectedText: string) {
-    await expect(this.page.locator('body')).toContainText(expectedText, { timeout: 60000 });
+    await expect(this.reviewList).toContainText(expectedText, { timeout: 60000 });
   }
 }

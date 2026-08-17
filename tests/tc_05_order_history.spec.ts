@@ -1,8 +1,8 @@
 import { test } from '../fixtures/authFixture';
-import { MyAccountPage } from '../pages/MyAccountPage';
 import billingData from '../data/billing.json'; 
 
 test('TC_05 - Verify orders appear in order history', async ({ 
+  myAccountPage,
   loggedInPage, 
   homePage, 
   shopPage, 
@@ -11,11 +11,10 @@ test('TC_05 - Verify orders appear in order history', async ({
 }) => {
   test.setTimeout(180000);
 
-  const myAccountPage = new MyAccountPage(loggedInPage);
+  await myAccountPage.registerRandomAccount();
 
-  
   for (let i = 1; i <= 2; i++) {
-    console.log(`Đang tiến hành đặt đơn hàng thứ ${i} qua luồng POM...`);
+    console.log(`Processing order number ${i} via POM...`);
 
     await homePage.goToShop();
     await shopPage.addFirstItemToCart();
