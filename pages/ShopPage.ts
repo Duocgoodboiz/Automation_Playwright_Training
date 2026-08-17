@@ -12,7 +12,6 @@ export class ShopPage {
   constructor(page: Page) {
     this.page = page;
     
-    // 1. Sửa lỗi: Web không có thẻ <main>, bắt buộc phải dùng class .content như cũ
     this.contentArea = page.locator('.content'); 
     
     this.listViewButton = page.locator('a[data-type="list"]').first();
@@ -27,7 +26,6 @@ export class ShopPage {
   }
 
   async switchToListView() {
-    // 2. Sửa lỗi: Nút bị CSS ẩn đi, bắt buộc phải dùng force: true để Playwright chịu click
     await this.listViewButton.click({ force: true });
   }
 
@@ -35,7 +33,6 @@ export class ShopPage {
     await this.firstProductLink.click();
     await this.addToCartButton.click();
     
-    // 3. Sửa lỗi: Thêm đồ bằng AJAX ở trang Shop sẽ hiện nút View cart (.added_to_cart) chứ không phải thanh message
     await this.page.waitForSelector('a.added_to_cart', { state: 'visible', timeout: 30000 }).catch(async () => {
       await this.page.waitForLoadState('networkidle');
     });
