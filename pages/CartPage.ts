@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { BasePage } from './BasePage'; 
 
-export class CartPage {
-  readonly page: Page;
+export class CartPage extends BasePage {
   readonly cartItem: Locator;
   readonly proceedToCheckoutBtn: Locator;
   readonly clearCartBtn: Locator;
@@ -13,10 +13,10 @@ export class CartPage {
   readonly updateCartBtn: Locator;
   readonly productPrice: Locator;
   readonly subtotalPrice: Locator;
-  readonly blockUI: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page); 
+    
     this.cartItem = page.locator('tbody tr.cart_item');
     this.proceedToCheckoutBtn = page.getByRole('link', { name: 'Proceed to checkout' });
     this.clearCartBtn = page.getByText('Clear shopping cart', { exact: false }); 
@@ -28,7 +28,6 @@ export class CartPage {
     this.updateCartBtn = page.getByRole('button', { name: /update cart/i });
     this.productPrice = page.locator('td.product-price bdi').first();
     this.subtotalPrice = page.locator('td.product-subtotal bdi').first();
-    this.blockUI = page.locator('.blockUI');
   }
 
   async verifyItemInCart() {
@@ -71,7 +70,7 @@ export class CartPage {
   }
 
   async changeQuantity(action: 'plus' | 'minus' | 'input', value?: string) {
-    await this.blockUI.waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
+    await this.waitForBlockUIHidden();
 
     if (action === 'plus') {
       await this.plusBtn.first().click();
@@ -85,6 +84,6 @@ export class CartPage {
     await this.updateCartBtn.scrollIntoViewIfNeeded();
     await this.updateCartBtn.click();
     
-    await this.blockUI.waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
+    await this.waitForBlockUIHidden();
   }
 }

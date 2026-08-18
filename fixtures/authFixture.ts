@@ -7,7 +7,6 @@ import { ProductDetailPage } from '../pages/ProductDetailPage';
 import { MyAccountPage } from '../pages/MyAccountPage'; 
 
 type MyFixtures = {
-  loggedInPage: Page;
   homePage: HomePage;
   shopPage: ShopPage;
   cartPage: CartPage;
@@ -17,29 +16,23 @@ type MyFixtures = {
 };
 
 export const test = base.extend<MyFixtures>({
-  
-  loggedInPage: async ({ page }, use) => {
-    await page.goto('/'); 
-    await use(page);
+  homePage: async ({ page }, use) => {
+    await use(new HomePage(page));
   },
-
-  homePage: async ({ loggedInPage }, use) => {
-    await use(new HomePage(loggedInPage));
+  shopPage: async ({ page }, use) => {
+    await use(new ShopPage(page));
   },
-  shopPage: async ({ loggedInPage }, use) => {
-    await use(new ShopPage(loggedInPage));
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
   },
-  cartPage: async ({ loggedInPage }, use) => {
-    await use(new CartPage(loggedInPage));
+  checkoutPage: async ({ page }, use) => {
+    await use(new CheckoutPage(page));
   },
-  checkoutPage: async ({ loggedInPage }, use) => {
-    await use(new CheckoutPage(loggedInPage));
+  productDetailPage: async ({ page }, use) => {
+    await use(new ProductDetailPage(page));
   },
-  productDetailPage: async ({ loggedInPage }, use) => {
-    await use(new ProductDetailPage(loggedInPage));
-  },
-  myAccountPage: async ({ loggedInPage }, use) => {
-    await use(new MyAccountPage(loggedInPage));
+  myAccountPage: async ({ page }, use) => {
+    await use(new MyAccountPage(page));
   },
 });
 

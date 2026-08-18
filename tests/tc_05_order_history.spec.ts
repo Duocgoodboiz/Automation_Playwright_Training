@@ -1,9 +1,10 @@
 import { test } from '../fixtures/authFixture';
-import billingData from '../data/billing.json'; 
+import billingData from '../data/billing.json';
+import { BillingInfo } from '../types/BillingInfo';
 
 test('TC_05 - Verify orders appear in order history', async ({ 
+  page,
   myAccountPage,
-  loggedInPage, 
   homePage, 
   shopPage, 
   cartPage, 
@@ -11,7 +12,10 @@ test('TC_05 - Verify orders appear in order history', async ({
 }) => {
   test.setTimeout(180000);
 
+  await homePage.goto();
   await myAccountPage.registerRandomAccount();
+
+  const validUserData: BillingInfo = billingData.validUser;
 
   for (let i = 1; i <= 2; i++) {
     console.log(`Processing order number ${i} via POM...`);
@@ -19,17 +23,18 @@ test('TC_05 - Verify orders appear in order history', async ({
     await homePage.goToShop();
     await shopPage.addFirstItemToCart();
     
-    await cartPage.page.goto('/cart');
+    await cartPage.goToCart();
     await cartPage.goToCheckout();
     
     await checkoutPage.verifyCheckoutPageDisplayed();
-    await checkoutPage.fillBillingDetails(billingData.validUser); 
+    
+    await checkoutPage.fillBillingDetails(validUserData); 
     await checkoutPage.placeOrder();
 
     await checkoutPage.verifyOrderSuccess();
   }
 
-  await loggedInPage.goto('/my-account');
+  await page.goto('/my-account');
 
   await myAccountPage.goToOrdersTab();
 

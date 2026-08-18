@@ -1,8 +1,9 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class ProductDetailPage {
-  readonly page: Page;
+export class ProductDetailPage extends BasePage {
   readonly reviewsTab: Locator;
+  readonly reviewFormWrapper: Locator;
   readonly starRating: Locator;
   readonly reviewTextbox: Locator;
   readonly nameTextbox: Locator;
@@ -11,8 +12,10 @@ export class ProductDetailPage {
   readonly reviewList: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
+    
     this.reviewsTab = page.getByRole('link', { name: /Reviews/i });
+    this.reviewFormWrapper = page.locator('#review_form_wrapper');
     this.starRating = page.locator('.stars a.star-5'); 
     this.reviewTextbox = page.getByRole('textbox', { name: /Your review/i });
     this.nameTextbox = page.getByRole('textbox', { name: /Name/i });
@@ -22,24 +25,17 @@ export class ProductDetailPage {
   }
 
   async goToReviewsTab() {
-    await this.reviewsTab.scrollIntoViewIfNeeded();
     await this.reviewsTab.click();
-    
-    await this.page.waitForSelector('#review_form_wrapper', { state: 'visible', timeout: 30000 });
+    await expect(this.reviewFormWrapper).toBeVisible({ timeout: 30000 });
   }
 
-  async submitReview(reviewText: string) {
-    await this.starRating.scrollIntoViewIfNeeded();
+  async submitReview(reviewText: string, name: string = 'John Doe', email: string = 'john.doe@automation.com') {
     await this.starRating.click();
-
     await this.reviewTextbox.fill(reviewText);
-
-    await this.nameTextbox.fill('John Doe');
-    await this.emailTextbox.fill('john.doe@automation.com');
+    await this.nameTextbox.fill(name);
+    await this.emailTextbox.fill(email);
     
     await this.submitBtn.click();
-
-    await this.page.waitForLoadState('networkidle', { timeout: 60000 });
   }
 
   async verifyReviewDisplays(expectedText: string) {

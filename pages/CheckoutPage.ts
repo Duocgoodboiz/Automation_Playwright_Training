@@ -1,7 +1,8 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { BasePage } from './BasePage';
+import { BillingInfo } from '../types/BillingInfo';
 
-export class CheckoutPage {
-  readonly page: Page;
+export class CheckoutPage extends BasePage {
   readonly checkoutTitle: Locator;
   readonly orderItem: Locator;
   readonly firstNameInput: Locator;
@@ -16,7 +17,8 @@ export class CheckoutPage {
   readonly errorMessages: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
+    
     this.checkoutTitle = page.getByText('Shopping cart Checkout Order');
     this.orderItem = page.locator('.cart_item');
     this.firstNameInput = page.getByRole('textbox', { name: 'First name *' });
@@ -36,7 +38,7 @@ export class CheckoutPage {
     await expect(this.orderItem.first()).toBeVisible();
   }
 
-  async fillBillingDetails(billingData: { firstName: string, lastName: string, address: string, city: string, phone: string, zipCode: string, email: string }) {
+  async fillBillingDetails(billingData: BillingInfo) {
     await this.firstNameInput.fill(billingData.firstName);
     await this.lastNameInput.fill(billingData.lastName);
 
@@ -52,7 +54,7 @@ export class CheckoutPage {
   }
 
   async selectPaymentMethod(methodName: string) {
-    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
+    await this.waitForBlockUIHidden(60000); 
     
     const methodOption = this.page.getByText(methodName, { exact: true });
     await methodOption.scrollIntoViewIfNeeded();
@@ -60,25 +62,18 @@ export class CheckoutPage {
   }
 
   async placeOrder() {
-    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
+    await this.waitForBlockUIHidden(60000); 
     
     await this.placeOrderBtn.scrollIntoViewIfNeeded();
     await this.placeOrderBtn.click();
   }
 
   async verifyOrderSuccess(timeoutMs: number = 60000) {
-    const element = await this.page.waitForSelector('.woocommerce-notice--success, .woocommerce-error', { state: 'visible', timeout: timeoutMs });
-    const className = await element.getAttribute('class') || '';
-
-    if (className.includes('woocommerce-error')) {
-      const errorText = await element.innerText();
-      throw new Error(`Test FAILED because the Demo Server rejected the order with reason: ${errorText}`);
-    }
-    await expect(this.page.getByRole('heading', { name: 'Order details' })).toBeVisible();
+    await expect(this.page.getByRole('heading', { name: 'Order details' })).toBeVisible({ timeout: timeoutMs });
   }
 
   async verifyMandatoryFieldsError() {
-    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
+    await this.waitForBlockUIHidden(60000); 
 
     await this.page.waitForSelector('.woocommerce-error', { state: 'visible', timeout: 30000 });
     const errorCount = await this.errorMessages.count();

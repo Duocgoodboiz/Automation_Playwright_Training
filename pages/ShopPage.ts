@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class ShopPage {
-  readonly page: Page;
+export class ShopPage extends BasePage {
   readonly contentArea: Locator;
   readonly listViewButton: Locator;
   readonly firstProductLink: Locator;
@@ -10,7 +10,7 @@ export class ShopPage {
   readonly itemPrices: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     
     this.contentArea = page.locator('.content'); 
     
@@ -49,7 +49,9 @@ export class ShopPage {
 
   async sortItemsByPrice(order: 'price' | 'price-desc') {
     await this.sortDropdown.selectOption(order);
-    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 60000 }).catch(() => {});
+    
+    await this.waitForBlockUIHidden(60000);
+    
     await this.page.waitForLoadState('domcontentloaded');
   }
 

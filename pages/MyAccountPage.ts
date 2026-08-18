@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class MyAccountPage {
-  readonly page: Page;
+export class MyAccountPage extends BasePage {
   readonly ordersLink: Locator;
   readonly ordersTable: Locator;
   readonly orderRows: Locator;
@@ -11,7 +11,7 @@ export class MyAccountPage {
   readonly registerBtn: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super(page);
     
     this.ordersLink = page.getByRole('link', { name: /orders/i }).first(); 
     

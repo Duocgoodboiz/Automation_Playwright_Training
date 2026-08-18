@@ -1,5 +1,6 @@
 import { test } from '../fixtures/authFixture';
 import billingData from '../data/billing.json';
+import { BillingInfo } from '../types/BillingInfo';
 
 const paymentMethods = [
   'Direct bank transfer', 
@@ -17,17 +18,20 @@ for (const method of paymentMethods) {
   }) => {
     test.setTimeout(120000); 
 
+    await homePage.goto();
     await myAccountPage.registerRandomAccount();
 
     await homePage.goToShop();
     await shopPage.switchToListView();
     await shopPage.addFirstItemToCart();
 
-    await cartPage.page.goto('/cart'); 
+    await cartPage.goToCart();
     await cartPage.goToCheckout();
 
     await checkoutPage.verifyCheckoutPageDisplayed();
-    await checkoutPage.fillBillingDetails(billingData.validUser); 
+    
+    const validUserData: BillingInfo = billingData.validUser;
+    await checkoutPage.fillBillingDetails(validUserData); 
 
     await checkoutPage.selectPaymentMethod(method);
 

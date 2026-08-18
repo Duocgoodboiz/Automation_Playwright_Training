@@ -1,5 +1,6 @@
 import { test } from '../fixtures/authFixture';
 import billingData from '../data/billing.json';
+import { BillingInfo } from '../types/BillingInfo';
 
 test('TC_02 - Verify users can buy multiple items successfully', async ({ 
   myAccountPage,
@@ -10,6 +11,7 @@ test('TC_02 - Verify users can buy multiple items successfully', async ({
 }) => {
   test.setTimeout(150000);
 
+  await homePage.goto();
   await myAccountPage.registerRandomAccount();
 
   await homePage.goToShop();
@@ -17,11 +19,14 @@ test('TC_02 - Verify users can buy multiple items successfully', async ({
 
   await shopPage.addMultipleItemsToCart(3);
 
-  await cartPage.page.goto('/cart'); 
+  await cartPage.goToCart();
   await cartPage.goToCheckout();
 
   await checkoutPage.verifyCheckoutPageDisplayed();
-  await checkoutPage.fillBillingDetails(billingData.validUser); 
+  
+  const validUserData: BillingInfo = billingData.validUser; 
+  await checkoutPage.fillBillingDetails(validUserData); 
+  
   await checkoutPage.placeOrder();
   
   await checkoutPage.verifyOrderSuccess();

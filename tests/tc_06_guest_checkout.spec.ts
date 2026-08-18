@@ -4,6 +4,7 @@ import { ShopPage } from '../pages/ShopPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import billingData from '../data/billing.json';
+import { BillingInfo } from '../types/BillingInfo';
 
 test('TC_06 - Verify users try to buy an item without logging in (As a guest)', async ({ page }) => {
   test.setTimeout(120000); 
@@ -13,18 +14,21 @@ test('TC_06 - Verify users try to buy an item without logging in (As a guest)', 
   const cartPage = new CartPage(page);
   const checkoutPage = new CheckoutPage(page);
 
-  await page.goto('/');
+  await homePage.goto();
 
   await homePage.goToShop();
   await shopPage.verifyContentDisplays();
   await shopPage.addFirstItemToCart();
 
-  await cartPage.page.goto('/cart'); 
+  await cartPage.goToCart(); 
   await cartPage.verifyItemInCart();
   await cartPage.goToCheckout();
 
   await checkoutPage.verifyCheckoutPageDisplayed();
-  await checkoutPage.fillBillingDetails(billingData.validUser); 
+  
+  const validUserData: BillingInfo = billingData.validUser;
+  await checkoutPage.fillBillingDetails(validUserData); 
+  
   await checkoutPage.placeOrder();
   
   await checkoutPage.verifyOrderSuccess();

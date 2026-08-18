@@ -9,13 +9,14 @@ test('TC_07 - Ensure proper error handling when mandatory fields are blank', asy
 }) => {
   test.setTimeout(120000);
   
+  await homePage.goto();
   await myAccountPage.registerRandomAccount();
 
   await homePage.goToShop();
   await shopPage.switchToListView();
   await shopPage.addFirstItemToCart();
   
-  await cartPage.page.goto('/cart'); 
+  await cartPage.goToCart();
   await cartPage.goToCheckout();
   await checkoutPage.verifyCheckoutPageDisplayed();
 
