@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class ShopPage {
-  readonly page: Page;
+export class ShopPage extends BasePage {
   readonly contentArea: Locator;
   readonly listViewButton: Locator;
   readonly firstProductLink: Locator;
@@ -10,8 +10,10 @@ export class ShopPage {
   readonly itemPrices: Locator;
 
   constructor(page: Page) {
-    this.page = page;
-    this.contentArea = page.locator('.content');
+    super(page);
+    
+    this.contentArea = page.locator('.content'); 
+    
     this.listViewButton = page.locator('a[data-type="list"]').first();
     this.firstProductLink = page.locator('.product a').first();
     this.addToCartButton = page.getByRole('button', { name: 'Add to cart' });
@@ -30,20 +32,26 @@ export class ShopPage {
   async addFirstItemToCart() {
     await this.firstProductLink.click();
     await this.addToCartButton.click();
-    await this.page.waitForTimeout(2000); 
+    
+    await this.page.waitForSelector('a.added_to_cart', { state: 'visible', timeout: 30000 }).catch(async () => {
+      await this.page.waitForLoadState('networkidle');
+    });
   }
 
   async addMultipleItemsToCart(amount: number) {
     const addButtons = await this.page.locator('.add_to_cart_button').all();
     for (let i = 0; i < amount; i++) {
+      await addButtons[i].scrollIntoViewIfNeeded();
       await addButtons[i].click();
-      await this.page.waitForTimeout(1500); 
+      await this.page.waitForLoadState('networkidle', { timeout: 30000 }); 
     }
   }
 
   async sortItemsByPrice(order: 'price' | 'price-desc') {
     await this.sortDropdown.selectOption(order);
-    await this.page.locator('.blockUI').waitFor({ state: 'hidden', timeout: 30000 }).catch(() => {});
+    
+    await this.waitForBlockUIHidden(60000);
+    
     await this.page.waitForLoadState('domcontentloaded');
   }
 
@@ -66,6 +74,8 @@ export class ShopPage {
   }
 
   async clickFirstProductToViewDetail() {
-    await this.page.locator('.product-content-image').first().click();
+    const firstImage = this.page.locator('.product-content-image').first();
+    await firstImage.scrollIntoViewIfNeeded();
+    await firstImage.click();
   }
 }
