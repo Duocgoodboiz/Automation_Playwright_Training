@@ -14,13 +14,13 @@ test('TC_06 - Verify users try to buy an item without logging in (As a guest)', 
   const cartPage = new CartPage(page);
   const checkoutPage = new CheckoutPage(page);
 
-  await homePage.goto();
+  await page.goto('/');
 
   await homePage.goToShop();
   await shopPage.verifyContentDisplays();
   await shopPage.addFirstItemToCart();
 
-  await cartPage.goToCart(); 
+  await shopPage.goToCart(); 
   await cartPage.verifyItemInCart();
   await cartPage.goToCheckout();
 

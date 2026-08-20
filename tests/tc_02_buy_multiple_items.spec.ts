@@ -11,7 +11,6 @@ test('TC_02 - Verify users can buy multiple items successfully', async ({
 }) => {
   test.setTimeout(150000);
 
-  await homePage.goto();
   await myAccountPage.registerRandomAccount();
 
   await homePage.goToShop();
@@ -19,7 +18,7 @@ test('TC_02 - Verify users can buy multiple items successfully', async ({
 
   await shopPage.addMultipleItemsToCart(3);
 
-  await cartPage.goToCart();
+  await shopPage.goToCart();
   await cartPage.goToCheckout();
 
   await checkoutPage.verifyCheckoutPageDisplayed();

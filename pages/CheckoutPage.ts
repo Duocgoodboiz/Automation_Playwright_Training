@@ -75,7 +75,7 @@ export class CheckoutPage extends BasePage {
   async verifyMandatoryFieldsError() {
     await this.waitForBlockUIHidden(60000); 
 
-    await this.page.waitForSelector('.woocommerce-error', { state: 'visible', timeout: 30000 });
+    await expect(this.errorMessages.first()).toBeVisible({ timeout: 30000 });
     const errorCount = await this.errorMessages.count();
     expect(errorCount).toBeGreaterThan(0);
   }

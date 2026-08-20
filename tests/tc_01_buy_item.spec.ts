@@ -11,7 +11,6 @@ test('TC_01 - Verify users can buy an item successfully (POM version)', async ({
 }) => {
   test.setTimeout(120000); 
 
-  await homePage.goto();
   await myAccountPage.registerRandomAccount();
 
   await homePage.goToShop();
@@ -21,7 +20,7 @@ test('TC_01 - Verify users can buy an item successfully (POM version)', async ({
   await shopPage.verifyContentDisplays();
   await shopPage.addFirstItemToCart();
   
-  await cartPage.goToCart(); 
+  await shopPage.goToCart(); 
   await cartPage.verifyItemInCart();
   await cartPage.goToCheckout();
 

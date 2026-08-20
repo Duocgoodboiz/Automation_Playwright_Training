@@ -11,10 +11,6 @@ export class HomePage extends BasePage {
     this.electronicComponentsLink = page.getByRole('link', { name: /Electronic Components/i }).first();
   }
 
-  async goto() {
-    await this.page.goto('/');
-  }
-
   async goToShop() {
     await this.page.goto('/product-category/electronic-components-supplies/');
   }

@@ -13,7 +13,7 @@ test('TC_08 - Verify users can clear the cart', async ({
   await homePage.goToShop();
   await shopPage.addFirstItemToCart();
 
-  await cartPage.goToCart(); 
+  await shopPage.goToCart(); 
   await cartPage.verifyItemInCart();
 
   await cartPage.clearAllItems();

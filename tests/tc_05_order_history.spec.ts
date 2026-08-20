@@ -12,7 +12,6 @@ test('TC_05 - Verify orders appear in order history', async ({
 }) => {
   test.setTimeout(180000);
 
-  await homePage.goto();
   await myAccountPage.registerRandomAccount();
 
   const validUserData: BillingInfo = billingData.validUser;
@@ -23,7 +22,7 @@ test('TC_05 - Verify orders appear in order history', async ({
     await homePage.goToShop();
     await shopPage.addFirstItemToCart();
     
-    await cartPage.goToCart();
+    await shopPage.goToCart();
     await cartPage.goToCheckout();
     
     await checkoutPage.verifyCheckoutPageDisplayed();
@@ -34,7 +33,7 @@ test('TC_05 - Verify orders appear in order history', async ({
     await checkoutPage.verifyOrderSuccess();
   }
 
-  await page.goto('/my-account');
+  await checkoutPage.goToMyAccount();
 
   await myAccountPage.goToOrdersTab();
 
