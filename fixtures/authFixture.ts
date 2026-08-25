@@ -4,44 +4,36 @@ import { ShopPage } from '../pages/ShopPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import { ProductDetailPage } from '../pages/ProductDetailPage'; 
+import { MyAccountPage } from '../pages/MyAccountPage'; 
 
 type MyFixtures = {
-  loggedInPage: Page;
   homePage: HomePage;
   shopPage: ShopPage;
   cartPage: CartPage;
   checkoutPage: CheckoutPage;
   productDetailPage: ProductDetailPage; 
+  myAccountPage: MyAccountPage;
 };
 
-const USER_PREFIX = 'testuser_';
-
 export const test = base.extend<MyFixtures>({
-  
-  loggedInPage: async ({ page }, use) => {
-    await page.goto('/'); 
-    await page.getByRole('link', { name: 'Log in / Sign up' }).click();
-    const randomEmail = `${USER_PREFIX}${Date.now()}@gmail.com`;
-    await page.locator('#reg_email').fill(randomEmail);
-    await page.getByRole('button', { name: 'Register' }).click({ force: true });
-    await page.waitForURL('**/my-account/**'); 
-    await use(page);
+  homePage: async ({ page }, use) => {
+    await page.goto('/');
+    await use(new HomePage(page));
   },
-
-  homePage: async ({ loggedInPage }, use) => {
-    await use(new HomePage(loggedInPage));
+  shopPage: async ({ page }, use) => {
+    await use(new ShopPage(page));
   },
-  shopPage: async ({ loggedInPage }, use) => {
-    await use(new ShopPage(loggedInPage));
+  cartPage: async ({ page }, use) => {
+    await use(new CartPage(page));
   },
-  cartPage: async ({ loggedInPage }, use) => {
-    await use(new CartPage(loggedInPage));
+  checkoutPage: async ({ page }, use) => {
+    await use(new CheckoutPage(page));
   },
-  checkoutPage: async ({ loggedInPage }, use) => {
-    await use(new CheckoutPage(loggedInPage));
+  productDetailPage: async ({ page }, use) => {
+    await use(new ProductDetailPage(page));
   },
-  productDetailPage: async ({ loggedInPage }, use) => {
-    await use(new ProductDetailPage(loggedInPage));
+  myAccountPage: async ({ page }, use) => {
+    await use(new MyAccountPage(page));
   },
 });
 

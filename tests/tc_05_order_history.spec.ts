@@ -1,9 +1,10 @@
 import { test } from '../fixtures/authFixture';
-import { MyAccountPage } from '../pages/MyAccountPage';
-import billingData from '../data/billing.json'; 
+import billingData from '../data/billing.json';
+import { BillingInfo } from '../types/BillingInfo';
 
 test('TC_05 - Verify orders appear in order history', async ({ 
-  loggedInPage, 
+  page,
+  myAccountPage,
   homePage, 
   shopPage, 
   cartPage, 
@@ -11,26 +12,28 @@ test('TC_05 - Verify orders appear in order history', async ({
 }) => {
   test.setTimeout(180000);
 
-  const myAccountPage = new MyAccountPage(loggedInPage);
+  await myAccountPage.registerRandomAccount();
 
-  
+  const validUserData: BillingInfo = billingData.validUser;
+
   for (let i = 1; i <= 2; i++) {
-    console.log(`Đang tiến hành đặt đơn hàng thứ ${i} qua luồng POM...`);
+    console.log(`Processing order number ${i} via POM...`);
 
     await homePage.goToShop();
     await shopPage.addFirstItemToCart();
     
-    await cartPage.page.goto('/cart');
+    await shopPage.goToCart();
     await cartPage.goToCheckout();
     
     await checkoutPage.verifyCheckoutPageDisplayed();
-    await checkoutPage.fillBillingDetails(billingData.validUser); 
+    
+    await checkoutPage.fillBillingDetails(validUserData); 
     await checkoutPage.placeOrder();
 
     await checkoutPage.verifyOrderSuccess();
   }
 
-  await loggedInPage.goto('/my-account');
+  await checkoutPage.goToMyAccount();
 
   await myAccountPage.goToOrdersTab();
 

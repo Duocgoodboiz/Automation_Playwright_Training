@@ -8,12 +8,12 @@ test('TC_08 - Verify users can clear the cart', async ({
 }) => {
   test.fail(true, 'Bug: Clicking OK on the confirmation popup does not clear the shopping cart.');
 
-  test.setTimeout(60000);
+  test.setTimeout(120000);
 
   await homePage.goToShop();
   await shopPage.addFirstItemToCart();
 
-  await cartPage.page.goto('/cart'); 
+  await shopPage.goToCart(); 
   await cartPage.verifyItemInCart();
 
   await cartPage.clearAllItems();

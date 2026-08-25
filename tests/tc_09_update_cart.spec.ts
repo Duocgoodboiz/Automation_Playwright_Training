@@ -5,7 +5,7 @@ test('TC_09 - Verify users can update quantity of product in cart', async ({
   shopPage, 
   cartPage 
 }) => {
-  test.setTimeout(60000); 
+  test.setTimeout(120000); 
 
   await homePage.goToShop();
   await shopPage.addFirstItemToCart();

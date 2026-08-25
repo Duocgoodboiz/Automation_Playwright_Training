@@ -1,13 +1,17 @@
 import { test } from '../fixtures/authFixture';
 import billingData from '../data/billing.json';
+import { BillingInfo } from '../types/BillingInfo';
 
 test('TC_01 - Verify users can buy an item successfully (POM version)', async ({ 
+  myAccountPage,
   homePage, 
   shopPage, 
   cartPage, 
   checkoutPage 
 }) => {
-  test.setTimeout(60000); 
+  test.setTimeout(120000); 
+
+  await myAccountPage.registerRandomAccount();
 
   await homePage.goToShop();
 
@@ -16,13 +20,15 @@ test('TC_01 - Verify users can buy an item successfully (POM version)', async ({
   await shopPage.verifyContentDisplays();
   await shopPage.addFirstItemToCart();
   
-  await cartPage.page.goto('/cart'); 
+  await shopPage.goToCart(); 
   await cartPage.verifyItemInCart();
   await cartPage.goToCheckout();
 
   await checkoutPage.verifyCheckoutPageDisplayed();
   
-  await checkoutPage.fillBillingDetails(billingData.validUser); 
+  const validUserData: BillingInfo = billingData.validUser; 
+  await checkoutPage.fillBillingDetails(validUserData); 
+  
   await checkoutPage.placeOrder();
   
   await checkoutPage.verifyOrderSuccess();

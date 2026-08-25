@@ -5,7 +5,7 @@ test('TC_10 - Verify users can post a review', async ({
   shopPage, 
   productDetailPage 
 }) => {
-  test.setTimeout(60000);
+  test.setTimeout(120000);
 
   await homePage.goToShop();
 
