@@ -1,20 +1,15 @@
-import { test } from '@playwright/test';
-import { HomePage } from '../pages/HomePage';
-import { ShopPage } from '../pages/ShopPage';
-import { CartPage } from '../pages/CartPage';
-import { CheckoutPage } from '../pages/CheckoutPage';
+import { test } from '../fixtures/authFixture';
 import billingData from '../data/billing.json';
 import { BillingInfo } from '../types/BillingInfo';
 
-test('TC_06 - Verify users try to buy an item without logging in (As a guest)', async ({ page }) => {
+test('TC_06 - Verify users try to buy an item without logging in (As a guest)', async ({ 
+  homePage, 
+  shopPage, 
+  cartPage, 
+  checkoutPage 
+}) => {
   test.setTimeout(120000); 
 
-  const homePage = new HomePage(page);
-  const shopPage = new ShopPage(page);
-  const cartPage = new CartPage(page);
-  const checkoutPage = new CheckoutPage(page);
-
-  await page.goto('/');
 
   await homePage.goToShop();
   await shopPage.verifyContentDisplays();
