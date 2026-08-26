@@ -8,13 +8,15 @@ export class BasePage {
 
   constructor(page: Page) {
     this.page = page;
-    this.blockUI = page.locator('.blockUI');
-    this.cartIcon = page.locator('a[href$="/cart/"]').first(); 
-    this.myAccountLink = page.locator('a[href$="/my-account/"]').first(); 
+    
+    this.blockUI = page.locator('div.blockUI.blockOverlay');
+    
+    this.cartIcon = page.locator('a[href*="/cart/"]').first(); 
+    this.myAccountLink = page.locator('a[href*="/my-account/"]').first(); 
   }
 
   async waitForBlockUIHidden(timeout: number = 30000) {
-    await this.blockUI.waitFor({ state: 'hidden', timeout }).catch(() => {});
+    await this.blockUI.first().waitFor({ state: 'hidden', timeout });
   }
 
   async goToCart() {

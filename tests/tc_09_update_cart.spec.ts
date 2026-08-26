@@ -9,7 +9,7 @@ test('TC_09 - Verify users can update quantity of product in cart', async ({
 
   await homePage.goToShop();
   await shopPage.addFirstItemToCart();
-  await cartPage.page.goto('/cart');
+  await shopPage.goToCart();
 
   await cartPage.verifyQuantityAndSubtotal('1');
 

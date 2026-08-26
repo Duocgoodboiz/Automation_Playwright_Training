@@ -30,12 +30,11 @@ export class ShopPage extends BasePage {
   }
 
   async addFirstItemToCart() {
-    await this.firstProductLink.click();
-    await this.addToCartButton.click();
+    const firstAddBtn = this.page.locator('.add_to_cart_button').first();
+    await firstAddBtn.scrollIntoViewIfNeeded();
+    await firstAddBtn.click();
     
-    await this.page.waitForSelector('a.added_to_cart', { state: 'visible', timeout: 30000 }).catch(async () => {
-      await this.page.waitForLoadState('networkidle');
-    });
+    await expect(firstAddBtn).toHaveClass(/added/, { timeout: 10000 });
   }
 
   async addMultipleItemsToCart(amount: number) {
@@ -43,7 +42,8 @@ export class ShopPage extends BasePage {
     for (let i = 0; i < amount; i++) {
       await addButtons[i].scrollIntoViewIfNeeded();
       await addButtons[i].click();
-      await this.page.waitForLoadState('networkidle', { timeout: 30000 }); 
+      
+      await expect(addButtons[i]).toHaveClass(/added/, { timeout: 10000 });
     }
   }
 

@@ -40,13 +40,12 @@ export class CartPage extends BasePage {
 
   async clearAllItems() {
     this.page.once('dialog', async dialog => {
-      console.log(`Hộp thoại xuất hiện với lời nhắn: "${dialog.message()}"`);
       await dialog.accept(); 
     });
 
     await this.clearCartBtn.click();
     
-    await this.page.waitForLoadState('networkidle'); 
+    await this.waitForBlockUIHidden(); 
   }
 
   async verifyCartIsEmpty() {
