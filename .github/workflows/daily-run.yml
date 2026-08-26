@@ -1,40 +1,82 @@
-name: Daily Playwright Tests
+name: Playwright Daily Tests
 
 on:
   schedule:
+    # Run at 17:00 UTC every day (which is 00:00 midnight GMT+7)
     - cron: '0 17 * * *'
+  
+  # Allow manual trigger from the GitHub Actions UI
   workflow_dispatch: 
 
 jobs:
-  test-and-report:
+  playwright-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-
+    strategy:
+      fail-fast: false
+      matrix:
+        # Divide the test suite into 3 shards, running on 3 parallel machines
+        shardIndex: [1, 2, 3]
+        shardTotal: [3]
+    
     steps:
-    - name: Tải mã nguồn (Checkout code)
+    - name: Checkout repository
       uses: actions/checkout@v4
-
-    - name: Thiết lập môi trường Node.js
+      
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 20
-
-    - name: Cài đặt thư viện (Bao gồm Playwright & Allure)
-      run: npm install
-
-    - name: Cài đặt trình duyệt Playwright
+        node-version: lts/*
+        
+    - name: Install dependencies
+      # Use npm ci for clean and exact dependency installation based on package-lock.json
+      run: npm ci
+      
+    - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-
-    - name: Chạy Test Suites
-      run: npx playwright test --project=chromium
-      continue-on-error: true
-
-    - name: Khởi tạo Allure Report
-      run: npx allure generate allure-results -o allure-report
-
-    - name: Đóng gói và Lưu Report (Upload Artifact)
+      
+    - name: Run Playwright tests with Sharding
+      # --shard distributes the tests. --reporter=blob outputs raw data for merging later.
+      run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} --reporter=blob
+      
+    - name: Upload blob report to GitHub Artifacts
+      if: always() # Ensure reports are uploaded even if tests fail
       uses: actions/upload-artifact@v4
       with:
-        name: Daily-Allure-Report
-        path: allure-report/
-        retention-days: 7 
+        name: blob-report-${{ matrix.shardIndex }}
+        path: blob-report
+        retention-days: 1
+
+  merge-reports:
+    if: always()
+    needs: [playwright-tests] # Wait for all sharded test jobs to complete
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Download all blob reports
+      uses: actions/download-artifact@v4
+      with:
+        path: all-blob-reports
+        pattern: blob-report-*
+        merge-multiple: true
+        
+    - name: Merge into a single HTML Report
+      run: npx playwright merge-reports --reporter html ./all-blob-reports
+      
+    - name: Upload HTML report to GitHub Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-html-report
+        path: playwright-report
+        retention-days: 14 # Keep the final report for 14 days
