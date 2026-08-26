@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, Locator, expect, test } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class MyAccountPage extends BasePage {
@@ -40,11 +40,12 @@ export class MyAccountPage extends BasePage {
   }
 
   async verifyOrdersAreDisplayed(expectedMinimumOrders: number = 2) {
-    await expect(this.ordersTable).toBeVisible({ timeout: 15000 });
-    
-    const actualOrderCount = await this.orderRows.count();
-    console.log(`Current order count: ${actualOrderCount}`);
-    
-    expect(actualOrderCount).toBeGreaterThanOrEqual(expectedMinimumOrders);
+    await test.step(`Verify at least ${expectedMinimumOrders} orders are displayed in Order History`, async () => {
+      await expect(this.ordersTable).toBeVisible({ timeout: 15000 });
+      
+      const actualOrderCount = await this.orderRows.count();
+      
+      expect(actualOrderCount).toBeGreaterThanOrEqual(expectedMinimumOrders);
+    });
   }
 }

@@ -13,7 +13,7 @@ test('TC_10 - Verify users can post a review', async ({
 
   await productDetailPage.goToReviewsTab();
 
-  const uniqueReview = `Sản phẩm dùng rất gud! Automation check: ${Date.now()}`;
+  const uniqueReview = `Great product! Automation check : ${Date.now()}`;
 
   await productDetailPage.submitReview(uniqueReview);
 

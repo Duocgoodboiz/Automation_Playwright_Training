@@ -26,8 +26,10 @@ export class CheckoutPage extends BasePage {
     this.addressInput = page.getByRole('textbox', { name: 'Street address *' });
     this.cityInput = page.getByRole('textbox', { name: 'Town / City *' });
     this.phoneInput = page.getByRole('textbox', { name: 'Phone *' });
-    this.zipCodeInput = page.locator('#billing_postcode');
-    this.emailInput = page.locator('#billing_email');
+    
+    this.zipCodeInput = page.getByRole('textbox', { name: /Postcode \/ ZIP/i });
+    this.emailInput = page.getByRole('textbox', { name: /Email address/i });
+    
     this.placeOrderBtn = page.getByRole('button', { name: 'Place order' });
     this.successMessage = page.locator('.woocommerce-notice--success');
     this.errorMessages = page.locator('.woocommerce-error li');
@@ -42,9 +44,12 @@ export class CheckoutPage extends BasePage {
     await this.firstNameInput.fill(billingData.firstName);
     await this.lastNameInput.fill(billingData.lastName);
 
-    await this.page.locator('#select2-billing_country-container').click();
-    await this.page.locator('.select2-search__field').fill('Vietnam');
-    await this.page.locator('.select2-search__field').press('Enter');
+    const countryDropdown = this.page.getByRole('combobox', { name: /Country|Region/i }).first();
+    await countryDropdown.scrollIntoViewIfNeeded();
+    await countryDropdown.click();
+    await this.page.getByRole('textbox').last().fill('Vietnam'); 
+    
+    await this.page.getByRole('option', { name: 'Vietnam', exact: true }).click();
 
     await this.addressInput.fill(billingData.address);
     await this.cityInput.fill(billingData.city);
