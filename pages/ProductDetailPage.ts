@@ -30,7 +30,9 @@ export class ProductDetailPage extends BasePage {
   }
 
   async submitReview(reviewText: string, name: string = 'John Doe', email: string = 'john.doe@automation.com') {
-    await this.starRating.click();
+    await this.starRating.scrollIntoViewIfNeeded();
+    await this.starRating.click({ force: true });
+    
     await this.reviewTextbox.fill(reviewText);
     await this.nameTextbox.fill(name);
     await this.emailTextbox.fill(email);
