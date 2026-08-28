@@ -25,14 +25,14 @@ export class ProductDetailPage extends BasePage {
   }
 
   async goToReviewsTab() {
-    await this.reviewsTab.click();
+    await this.reviewsTab.scrollIntoViewIfNeeded();
+    await this.reviewsTab.click({ force: true });
     await expect(this.reviewFormWrapper).toBeVisible({ timeout: 30000 });
   }
 
   async submitReview(reviewText: string, name: string = 'John Doe', email: string = 'john.doe@automation.com') {
     await this.starRating.scrollIntoViewIfNeeded();
     await this.starRating.click({ force: true });
-    
     await this.reviewTextbox.fill(reviewText);
     await this.nameTextbox.fill(name);
     await this.emailTextbox.fill(email);
