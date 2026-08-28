@@ -30,6 +30,8 @@ export class ShopPage extends BasePage {
   }
 
   async addFirstItemToCart() {
+    await this.page.waitForLoadState('networkidle');
+    
     const firstAddBtn = this.page.locator('.add_to_cart_button').first();
     await firstAddBtn.waitFor({ state: 'visible' });
     await firstAddBtn.scrollIntoViewIfNeeded();
@@ -39,6 +41,8 @@ export class ShopPage extends BasePage {
   }
 
   async addMultipleItemsToCart(amount: number) {
+    await this.page.waitForLoadState('networkidle');
+    
     const addButtons = this.page.locator('.add_to_cart_button');
     for (let i = 0; i < amount; i++) {
       const targetBtn = addButtons.nth(i);
