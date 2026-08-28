@@ -73,21 +73,19 @@ export class CartPage extends BasePage {
 
     if (action === 'plus') {
       await this.plusBtn.first().click();
+      await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
+      await this.updateCartBtn.click();
     } else if (action === 'minus') {
       await this.minusBtn.first().click();
+      await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
+      await this.updateCartBtn.click();
     } else if (action === 'input' && value) {
       const inputEl = this.qtyInput.first();
       await inputEl.scrollIntoViewIfNeeded();
-      await inputEl.click();
-      await inputEl.clear();
-      await inputEl.pressSequentially(value, { delay: 100 });
-      await inputEl.blur(); 
+      await inputEl.fill(value);
+      await inputEl.press('Enter'); 
     }
 
-    await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
-    await this.updateCartBtn.scrollIntoViewIfNeeded();
-    await this.updateCartBtn.click({ force: true });
-    
     await this.page.waitForTimeout(1000); 
     await this.waitForBlockUIHidden();
   }
