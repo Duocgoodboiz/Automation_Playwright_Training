@@ -48,10 +48,13 @@ export class CheckoutPage extends BasePage {
     await countryDropdown.scrollIntoViewIfNeeded();
     await countryDropdown.click();
     
-    await this.page.getByRole('textbox').last().fill('Vietnam'); 
-    await this.page.waitForTimeout(500);
-    await this.page.getByRole('option', { name: 'Vietnam', exact: true }).click({ force: true });
-
+    const searchInput = this.page.getByRole('textbox').last();
+    await searchInput.fill('Vietnam'); 
+    
+    const vietnamOption = this.page.locator('.select2-results__option').filter({ hasText: 'Vietnam' });
+    await vietnamOption.waitFor({ state: 'visible' });
+    await vietnamOption.click();
+    
     await this.waitForBlockUIHidden(60000);
 
     await this.addressInput.fill(billingData.address);
