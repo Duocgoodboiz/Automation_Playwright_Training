@@ -83,7 +83,9 @@ export class CartPage extends BasePage {
       const inputEl = this.qtyInput.first();
       await inputEl.scrollIntoViewIfNeeded();
       await inputEl.fill(value);
-      await inputEl.press('Enter'); 
+      await inputEl.blur(); 
+      await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
+      await this.updateCartBtn.click();
     }
 
     await this.page.waitForTimeout(1000); 
