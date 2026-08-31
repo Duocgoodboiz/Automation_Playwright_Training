@@ -1,5 +1,9 @@
 name: Playwright Daily Tests
 
+permissions:
+  contents: read
+  actions: write
+
 on:
   schedule:
     - cron: '0 17 * * *'
