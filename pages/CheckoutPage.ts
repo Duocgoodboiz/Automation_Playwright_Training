@@ -41,10 +41,14 @@ export class CheckoutPage extends BasePage {
   }
 
   async fillBillingDetails(billingData: BillingInfo) {
+    await this.page.waitForLoadState('networkidle');
+    await this.waitForBlockUIHidden(60000);
+
     await this.firstNameInput.fill(billingData.firstName);
     await this.lastNameInput.fill(billingData.lastName);
 
     const countryDropdown = this.page.locator('#select2-billing_country-container');
+    await countryDropdown.waitFor({ state: 'attached' }); 
     await countryDropdown.scrollIntoViewIfNeeded();
     await countryDropdown.click();
     

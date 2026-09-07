@@ -26,7 +26,7 @@ export class ShopPage extends BasePage {
   }
 
   async switchToListView() {
-    await this.listViewButton.click({ force: true });
+    await this.listViewButton.evaluate((node: HTMLElement) => node.click());
   }
 
   async addFirstItemToCart() {

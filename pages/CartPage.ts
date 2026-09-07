@@ -70,27 +70,27 @@ export class CartPage extends BasePage {
 
   async changeQuantity(action: 'plus' | 'minus' | 'input', value?: string) {
     await this.waitForBlockUIHidden();
+    
+    const inputEl = this.qtyInput.first();
+    const currentValue = await inputEl.inputValue();
 
     if (action === 'plus') {
       await this.plusBtn.first().click();
-      await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
-      await this.updateCartBtn.click();
+      await expect(inputEl).not.toHaveValue(currentValue, { timeout: 5000 });
     } else if (action === 'minus') {
       await this.minusBtn.first().click();
-      await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
-      await this.updateCartBtn.click();
+      await expect(inputEl).not.toHaveValue(currentValue, { timeout: 5000 });
     } else if (action === 'input' && value) {
-      const inputEl = this.qtyInput.first();
       await inputEl.scrollIntoViewIfNeeded();
-      
       await inputEl.clear();
       await inputEl.pressSequentially(value, { delay: 150 });
-      
-      await inputEl.evaluate(node => node.dispatchEvent(new Event('change', { bubbles: true })));
-      
-      await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
-      await this.updateCartBtn.click();
     }
+
+    await inputEl.evaluate(node => node.dispatchEvent(new Event('change', { bubbles: true })));
+    
+    await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
+
+    await this.updateCartBtn.click({ force: true });
 
     await this.page.waitForTimeout(1500); 
     await this.waitForBlockUIHidden();
