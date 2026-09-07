@@ -30,8 +30,16 @@ on:
           - dot
         default: 'html'
       projects:
-        description: 'Projects to run (e.g. chromium, firefox)'
-        type: string
+        description: 'Browser project to run'
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+          - Google Chrome
+          - Microsoft Edge
+          - Mobile Chrome
+          - Mobile Safari
         default: 'chromium'
       retries:
         description: 'Number of retries on test failure'
