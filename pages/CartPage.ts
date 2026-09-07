@@ -82,11 +82,13 @@ export class CartPage extends BasePage {
     } else if (action === 'input' && value) {
       const inputEl = this.qtyInput.first();
       await inputEl.scrollIntoViewIfNeeded();
-      await inputEl.click();
-      await inputEl.fill(value);
-      await inputEl.press('Tab'); 
+      
+      await inputEl.clear();
+      await inputEl.pressSequentially(value, { delay: 150 });
+      
+      await inputEl.evaluate(node => node.dispatchEvent(new Event('change', { bubbles: true })));
+      
       await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
-      await this.page.waitForTimeout(500); 
       await this.updateCartBtn.click();
     }
 
