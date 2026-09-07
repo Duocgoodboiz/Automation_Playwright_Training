@@ -82,13 +82,15 @@ export class CartPage extends BasePage {
     } else if (action === 'input' && value) {
       const inputEl = this.qtyInput.first();
       await inputEl.scrollIntoViewIfNeeded();
+      await inputEl.click();
       await inputEl.fill(value);
-      await inputEl.blur(); 
+      await inputEl.press('Tab'); 
       await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
+      await this.page.waitForTimeout(500); 
       await this.updateCartBtn.click();
     }
 
-    await this.page.waitForTimeout(1000); 
+    await this.page.waitForTimeout(1500); 
     await this.waitForBlockUIHidden();
   }
 }

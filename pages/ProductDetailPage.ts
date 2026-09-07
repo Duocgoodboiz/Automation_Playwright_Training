@@ -25,6 +25,8 @@ export class ProductDetailPage extends BasePage {
   }
 
   async goToReviewsTab() {
+    await this.page.waitForLoadState('networkidle');
+    await this.reviewsTab.scrollIntoViewIfNeeded();
     await this.reviewsTab.click();
     await expect(this.reviewFormWrapper).toBeVisible({ timeout: 30000 });
   }
