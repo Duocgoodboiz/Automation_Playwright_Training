@@ -58,7 +58,7 @@ export class CartPage extends BasePage {
   }
 
   async verifyQuantityAndSubtotal(expectedQty: string) {
-    await expect(this.qtyInput.first()).toHaveValue(expectedQty, { timeout: 10000 });
+    await expect(this.qtyInput.first()).toHaveValue(expectedQty, { timeout: 15000 });
 
     const unitPrice = await this.getNumericPrice(this.productPrice);
     const expectedSubtotal = unitPrice * parseInt(expectedQty);
@@ -70,19 +70,29 @@ export class CartPage extends BasePage {
 
   async changeQuantity(action: 'plus' | 'minus' | 'input', value?: string) {
     await this.waitForBlockUIHidden();
+    
+    const inputEl = this.qtyInput.first();
+    const currentValue = await inputEl.inputValue();
 
     if (action === 'plus') {
       await this.plusBtn.first().click();
+      await expect(inputEl).not.toHaveValue(currentValue, { timeout: 5000 });
     } else if (action === 'minus') {
       await this.minusBtn.first().click();
+      await expect(inputEl).not.toHaveValue(currentValue, { timeout: 5000 });
     } else if (action === 'input' && value) {
-      await this.qtyInput.first().fill(value);
+      await inputEl.scrollIntoViewIfNeeded();
+      await inputEl.clear();
+      await inputEl.pressSequentially(value, { delay: 150 });
     }
 
-    await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
-    await this.updateCartBtn.scrollIntoViewIfNeeded();
-    await this.updateCartBtn.click();
+    await inputEl.evaluate(node => node.dispatchEvent(new Event('change', { bubbles: true })));
     
+    await expect(this.updateCartBtn).toBeEnabled({ timeout: 15000 });
+
+    await this.updateCartBtn.click({ force: true });
+
+    await this.page.waitForTimeout(1500); 
     await this.waitForBlockUIHidden();
   }
 }

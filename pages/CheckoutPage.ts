@@ -41,15 +41,26 @@ export class CheckoutPage extends BasePage {
   }
 
   async fillBillingDetails(billingData: BillingInfo) {
+    await this.page.waitForLoadState('networkidle');
+    await this.waitForBlockUIHidden(60000);
+
     await this.firstNameInput.fill(billingData.firstName);
     await this.lastNameInput.fill(billingData.lastName);
 
-    const countryDropdown = this.page.getByRole('combobox', { name: /Country|Region/i }).first();
+    const countryDropdown = this.page.locator('#select2-billing_country-container');
+    await countryDropdown.waitFor({ state: 'attached' }); 
     await countryDropdown.scrollIntoViewIfNeeded();
     await countryDropdown.click();
-    await this.page.getByRole('textbox').last().fill('Vietnam'); 
     
-    await this.page.getByRole('option', { name: 'Vietnam', exact: true }).click();
+    const searchInput = this.page.locator('.select2-search__field').first();
+    await searchInput.waitFor({ state: 'visible' });
+    await searchInput.fill('Vietnam'); 
+
+    const vietnamOption = this.page.locator('.select2-results__option').filter({ hasText: 'Vietnam' });
+    await vietnamOption.waitFor({ state: 'visible' });
+    await vietnamOption.click();
+    
+    await this.waitForBlockUIHidden(60000);
 
     await this.addressInput.fill(billingData.address);
     await this.cityInput.fill(billingData.city);

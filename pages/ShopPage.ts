@@ -26,24 +26,29 @@ export class ShopPage extends BasePage {
   }
 
   async switchToListView() {
-    await this.listViewButton.click({ force: true });
+    await this.listViewButton.evaluate((node: HTMLElement) => node.click());
   }
 
   async addFirstItemToCart() {
+    await this.page.waitForLoadState('networkidle');
     const firstAddBtn = this.page.locator('.add_to_cart_button').first();
+    await firstAddBtn.waitFor({ state: 'visible' });
     await firstAddBtn.scrollIntoViewIfNeeded();
-    await firstAddBtn.click();
+    await firstAddBtn.click({ force: true });
     
-    await expect(firstAddBtn).toHaveClass(/added/, { timeout: 10000 });
+    await expect(firstAddBtn).toHaveClass(/added/, { timeout: 15000 });
   }
 
   async addMultipleItemsToCart(amount: number) {
-    const addButtons = await this.page.locator('.add_to_cart_button').all();
+    await this.page.waitForLoadState('networkidle');
+    const addButtons = this.page.locator('.add_to_cart_button');
     for (let i = 0; i < amount; i++) {
-      await addButtons[i].scrollIntoViewIfNeeded();
-      await addButtons[i].click();
+      const targetBtn = addButtons.nth(i);
+      await targetBtn.waitFor({ state: 'visible' });
+      await targetBtn.scrollIntoViewIfNeeded();
+      await targetBtn.click({ force: true });
       
-      await expect(addButtons[i]).toHaveClass(/added/, { timeout: 10000 });
+      await expect(targetBtn).toHaveClass(/added/, { timeout: 15000 });
     }
   }
 
@@ -75,6 +80,7 @@ export class ShopPage extends BasePage {
 
   async clickFirstProductToViewDetail() {
     const firstImage = this.page.locator('.product-content-image').first();
+    await firstImage.waitFor({ state: 'visible' });
     await firstImage.scrollIntoViewIfNeeded();
     await firstImage.click();
   }

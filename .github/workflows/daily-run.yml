@@ -1,12 +1,50 @@
 name: Playwright Daily Tests
 
+permissions:
+  contents: read
+  actions: write
+
 on:
   schedule:
-    # Run at 17:00 UTC every day (which is 00:00 midnight GMT+7)
     - cron: '0 17 * * *'
-  
-  # Allow manual trigger from the GitHub Actions UI
-  workflow_dispatch: 
+  workflow_dispatch:
+    inputs:
+      fullyParallel:
+        description: 'Run tests fully in parallel (true/false)'
+        type: boolean
+        default: false
+      timeout:
+        description: 'Test timeout (in milliseconds)'
+        type: string
+        default: '120000'
+      workers:
+        description: 'Number of workers (e.g. 1, 2, or 50%)'
+        type: string
+        default: '1'
+      reporter:
+        description: 'Final Reporter output'
+        type: choice
+        options:
+          - html
+          - list
+          - dot
+        default: 'html'
+      projects:
+        description: 'Browser project to run'
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+          - Google Chrome
+          - Microsoft Edge
+          - Mobile Chrome
+          - Mobile Safari
+        default: 'chromium'
+      retries:
+        description: 'Number of retries on test failure'
+        type: string
+        default: '0'
 
 jobs:
   playwright-tests:
@@ -15,32 +53,33 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Divide the test suite into 3 shards, running on 3 parallel machines
         shardIndex: [1, 2, 3]
         shardTotal: [3]
     
+    env:
+      CI_FULLY_PARALLEL: ${{ inputs.fullyParallel }}
+      CI_TIMEOUT: ${{ inputs.timeout }}
+      CI_WORKERS: ${{ inputs.workers }}
+      CI_PROJECTS: ${{ inputs.projects }}
+      CI_RETRIES: ${{ inputs.retries }}
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
         node-version: lts/*
         
     - name: Install dependencies
-      # Use npm ci for clean and exact dependency installation based on package-lock.json
       run: npm ci
       
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
       
-    - name: Run Playwright tests with Sharding
-      # --shard distributes the tests. --reporter=blob outputs raw data for merging later.
+    - name: Run Playwright tests
       run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }} --reporter=blob
       
     - name: Upload blob report to GitHub Artifacts
-      if: always() # Ensure reports are uploaded even if tests fail
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: blob-report-${{ matrix.shardIndex }}
@@ -49,15 +88,12 @@ jobs:
 
   merge-reports:
     if: always()
-    needs: [playwright-tests] # Wait for all sharded test jobs to complete
+    needs: [playwright-tests]
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
         node-version: lts/*
         
@@ -71,12 +107,20 @@ jobs:
         pattern: blob-report-*
         merge-multiple: true
         
-    - name: Merge into a single HTML Report
-      run: npx playwright merge-reports --reporter html ./all-blob-reports
+    - name: Merge into Final Report
+      run: npx playwright merge-reports --reporter ${{ inputs.reporter || 'html' }} ./all-blob-reports
       
-    - name: Upload HTML report to GitHub Artifacts
+    - name: Upload Final HTML report
       uses: actions/upload-artifact@v4
       with:
-        name: playwright-html-report
+        name: playwright-${{ inputs.reporter || 'html' }}-report
         path: playwright-report
-        retention-days: 14 # Keep the final report for 14 days
+        retention-days: 14
+
+    - name: Delete intermediate blob reports
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh api -X GET /repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts \
+          --jq '.artifacts[] | select(.name | startswith("blob-report-")) | .url' | \
+        xargs -I {} gh api -X DELETE {}

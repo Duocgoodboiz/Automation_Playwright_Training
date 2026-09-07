@@ -23,6 +23,6 @@ export class HomePage extends BasePage {
     
     await this.electronicComponentsLink.waitFor({ state: 'visible', timeout: 10000 });
 
-    await this.electronicComponentsLink.click();
+    await this.electronicComponentsLink.click({ force: true });
   }
 }

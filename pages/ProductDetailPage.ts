@@ -25,12 +25,16 @@ export class ProductDetailPage extends BasePage {
   }
 
   async goToReviewsTab() {
+    await this.page.waitForLoadState('networkidle');
+    await this.reviewsTab.scrollIntoViewIfNeeded();
     await this.reviewsTab.click();
     await expect(this.reviewFormWrapper).toBeVisible({ timeout: 30000 });
   }
 
   async submitReview(reviewText: string, name: string = 'John Doe', email: string = 'john.doe@automation.com') {
+    await this.starRating.waitFor({ state: 'visible' });
     await this.starRating.click();
+    
     await this.reviewTextbox.fill(reviewText);
     await this.nameTextbox.fill(name);
     await this.emailTextbox.fill(email);

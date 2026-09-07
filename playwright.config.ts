@@ -2,26 +2,38 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 60000, // Tăng thời gian chờ cho mỗi test lên 60 giây
+  
+  timeout: process.env.CI_TIMEOUT ? parseInt(process.env.CI_TIMEOUT) : 60000, 
+  
   expect: {
-    timeout: 15000, // Tăng thời gian chờ của expect lên 15 giây
+    timeout: 15000,
   },
-  fullyParallel: false,
+
+  fullyParallel: process.env.CI_FULLY_PARALLEL === 'true' ? true : false,
+  
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: 1, // Chạy 1 luồng để giảm tải cho server
-  reporter: [
-    ['html'], // Giữ lại báo cáo mặc định nếu muốn
-    ['allure-playwright'] // Thêm dòng này để gọi Allure Report
-  ],
+
+  retries: process.env.CI_RETRIES ? parseInt(process.env.CI_RETRIES) : (process.env.CI ? 2 : 0),
+
+  workers: process.env.CI_WORKERS ? (isNaN(Number(process.env.CI_WORKERS)) ? process.env.CI_WORKERS : parseInt(process.env.CI_WORKERS)) : 1,
+
+  reporter: process.env.CI_REPORTER 
+    ? [[process.env.CI_REPORTER]] 
+    : [
+        ['html'], 
+        ['allure-playwright']
+      ],
+      
   use: {
     trace: 'on-first-retry',
     baseURL: 'https://demo.testarchitect.com',
   },
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: process.env.CI_PROJECTS || 'chromium',
+      use: { 
+        ...devices[process.env.CI_PROJECTS === 'firefox' ? 'Desktop Firefox' : 'Desktop Chrome'] 
+      },
     },
   ],
 });
